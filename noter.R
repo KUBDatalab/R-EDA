@@ -1,8 +1,8 @@
 #Gøres inden vi overhovedet går igang - fortæller senere hvad den gør
 #install.packages("tidyverse")
 
-#download.file("https://raw.githubusercontent.com/KUBDatalab/R-intro/main/data/flightdata.xlsx",
-#              "flightdata.xlsx", mode = "wb")
+download.file("https://raw.githubusercontent.com/KUBDatalab/R-intro/main/data/flightdata.xlsx",
+              "flightdata.xlsx", mode = "wb")
 
 #install.packages("readxl")
 library(readxl)
@@ -12,20 +12,24 @@ data <- read_excel("data/flightdata.xlsx")
 library(tidyverse)
 
 data %>% 
+  sample_frac(.005)
+
+# kan I huske hvad den pipe gør? og F1
+
+data %>% 
   sample_frac(.005) %>%
   ggplot(mapping = aes(x=dep_delay, y=arr_delay)) +
   geom_point()
 
-# vi tænker lige over sample_frac. Den kan forvirre.
-# Men den tid vi bruger på at vente på plottet...
+# sample_frac kan forvirre. men den er værd at have med!
+# bør ved lejlighed ændres til slice_sample
 
 # Og inden vi taler om ggplot - så må vi heller kigge
 # på hvad datastrukturen er.
 data
 View(data)
 # Det er vigtigt at vide hvilke data vi har-
-# så ved vi nemlig at planlagt ankomst er gemt som
-# antal minutter efter midnat.
+# HOV! departure og arrivaltime er faktisk i HHMM (eller HMM)
 
 
 # Indholdet af hjælpe filen til denne bør vi nok 
@@ -52,8 +56,11 @@ data %>%
   arrange(carrier) %>% 
   view()
 
+# Hvis jeg nu godt vil vide hvad den gennemsnitlige forsinkelse på afgange er?
+
 data %>% 
   summarise(gennemsnitlig_forsinket_afgang = mean(dep_delay))
+
 
 # Hov NA!!
 # Og vi så faktisk (sandsynligvis) det same under
@@ -70,7 +77,7 @@ data %>% select(dep_delay) %>%
 #             andel_manglende = manglende_værdier/antal_værdier*100)
 # vi behøver ikke at selecte! måske først senere.
 
-#kan summarise over flere kolonner
+# hvad er så forsinkelse på ankomst?
 data %>% 
   summarise(gennemsnit_forsinket_afgang = mean(dep_delay, na.rm =T),
             gennemsnit_forsinket_ankomst = mean(arr_delay, na.rm=T))
@@ -87,7 +94,28 @@ data %>%
   group_by(carrier) %>% 
   summarise(gennemsnit_forsinket_afgang = mean(dep_delay, na.rm =T),
             gennemsnit_forsinket_ankomst = mean(arr_delay, na.rm=T)) %>% 
-  filter(gennemsnit_forsinket_afgang < 20 )
+  filter(gennemsnit_forsinket_afgang < 20 ) 
+
+
+#Hov! der er jo noget med der er 20.0 Hvorfor?
+
+# afrunding? -------------
+
+
+data %>%
+  group_by(carrier) %>% 
+  summarise(gennemsnit_forsinket_afgang = mean(dep_delay, na.rm =T),
+            gennemsnit_forsinket_ankomst = mean(arr_delay, na.rm=T)) %>% 
+  filter(gennemsnit_forsinket_afgang < 20 ) %>% 
+  pull(gennemsnit_forsinket_afgang)
+
+# eller coerce til dataframe - der er nemlig forskel på dataframe og tibble.
+# as.data.frame()
+  
+# end afrunding? ------
+
+
+
 
 #Logiske operatorer Hvis vi godt vil have forsinket afgang mindre end 20
 # OG forsinket ankomst mindre end noget andet.
@@ -115,6 +143,13 @@ data %>%
             gennemsnit_forsinket_ankomst = mean(arr_delay, na.rm=T)) %>% 
   filter(gennemsnit_forsinket_afgang < 20 &   
          gennemsnit_forsinket_afgang > 15)
+
+# fordi det bliver tydeligere at der faktisk er en AND. Og fordi det bliver
+# tydeligt, at vi kan sætte en | (OR) ind.
+# Det kan også være godt at være eksplicit om sådan noget. Det kan være 
+# din kollega ikke ved at filter har en implicit AND. Eller kan huske.
+
+
 
 # Hvad med eller? Hvem har forsinkelser mellem 10 og 20 minutter?
 data %>%
@@ -146,9 +181,10 @@ data %>%
 
 # acceptabel forinsket akomst laver vi om til 10 minutter.
 # acceptabel forsinket afgang er jo defineret.
-res_rigtig_første
-res_fejl_første
-res_rigtig_anden
+
+acceptabel_forsinkelse_ankomst <- 10
+
+# Hov!
 
 # Nu er det tid at introducere variable, assignment og "objekter"
 # "genbruge" resultatet af ting vi har gjort
@@ -184,9 +220,12 @@ data %>%
             antal_values = n(),
             andel_departure = manglende_departure/antal_values*100)
 
+# er den procentsats stor eler lille? Hvor mange afgange dækker 9.2% over
+# kontra 9.38%
 
 #vi kan godt udelade nogle kolonner - kun beholde andel_departure og lave en 
 #andel_arrival
+# vi kan nemlig bruge n() uden at skulle have den med som kolonne.
 data %>% 
   group_by(carrier) %>% 
   summarise(gennemsnitlig_forsinket_afgang = mean(dep_delay, na.rm = TRUE),
@@ -195,7 +234,10 @@ data %>%
             proportion_arrival = sum(is.na(arr_delay))/n()*100)
 
 
-#arrange
+# vil vi have den i en anden rækkefølge?
+# dplyr::relocate()
+
+# sortering?
 data %>% 
   group_by(carrier) %>% 
   summarise(gennemsnitlig_forsinket_afgang = mean(dep_delay, na.rm = TRUE),
@@ -204,22 +246,9 @@ data %>%
             proportion_arrival = sum(is.na(arr_delay))/n()*100) %>% 
   arrange(proportion_departure, proportion_arrival)
 
-# her begynder der er være ting vi skal have med nu. ------------
-forsinkelser %>% 
-  filter(gennemsnit_forsinket_afgang > 15)
 
 
 
-
-
-#Øvelse til dem - Find ud af hvem der har den laveste gennemsnitlige forsinkede
-#ankomst - brug plottet til at sjusse sig til værdi - hvem er det?
-forsinkelser %>% 
-  filter(gennemsnit_forsinket_ankomst < -9)
-
-# default AND, men pædagosik &
-forsinkelser %>% 
-  filter(gennemsnit_forsinket_afgang >10 & gennemsnit_forsinket_afgang < 15)
 
 #Man kan også udvælge to carrier hvis der er noget man vil nær studere
 # or operatoren. forskellige anførselstegn?
@@ -239,9 +268,10 @@ forsinkelser %>%
 # vektorer. 
 # datatyper
 # Nok begge!
-# class()
-# gem data - nok omkring hvor vi gemmer i en variabel!
+
 # Split-apply-combine som begreb i forbindelse med group_by?
+
+
 # gem data!
 # dimensioner af datafrmaes, dim, ncol, nrow, head, tail, names
 # det ligger naturligt lige efter plottet.
@@ -271,7 +301,12 @@ read_excel("flightdata.xlsx", sheet="airlines")
 #F1
 
 airlines <- read_excel("flightdata.xlsx", sheet="airlines")
-
+# man kan også bruge nummeret - det kræver at dine kolleger ikke sætter ekstra
+# ark ind midt i det hele. Eller ændrer rækkefølge.
+# brugen af navn på arket holder også op med at virke hvis dine kolleger ændrer
+# navnet. Men så får du en advarsel! (med mindre de har ændret navnet for at 
+# lave et nyt ark der hedder det samme, men indeholder noget andet. Tal med
+# dine kolleger!)
 airlines %>%  filter(carrier == "F9" | carrier == "AS")
 
 #kunne godt tænke os at få det på den tidligere dataframe
@@ -283,7 +318,7 @@ data %>%
             proportion_arrival = sum(is.na(arr_delay))/n()*100) %>% 
   left_join(airlines, by = c("carrier" = "carrier"))
 
-#carrier skal være lig med name og name stå først
+#name skifter navn til carrier. Og vi gider ikke se på name bagefter.
 data %>% 
   group_by(carrier) %>% 
   summarise(gennemsnitlig_forsinket_afgang = mean(dep_delay, na.rm = TRUE),
@@ -308,8 +343,12 @@ data %>%
                        y = gennemsnit_forsinket_ankomst, color = carrier)) +
   geom_point() +
   geom_hline(aes(yintercept = 0)) +
-  geom_label(aes(label = carrier))
+  
+  geom_label(aes(label = carrier)) 
 
+# Vi kan tænke over om der skal alpha ind i geom_label, eller om 
+# geom_point skal ind efter label
+# hvad med library(ggrepel) og geom_label_repel i stedet?
 #fjerne legends
 data %>% 
   group_by(carrier) %>% 
@@ -327,9 +366,9 @@ data %>%
   geom_hline(aes(yintercept = 0)) +
   geom_label(aes(label = carrier))
 
-#undgå at de overlagger - via hjælpepakke ggrepel
-install.packages("ggrepel")
-library(ggrepel)
+# #undgå at de overlagger - via hjælpepakke ggrepel
+# install.packages("ggrepel")
+# library(ggrepel)
 
 data %>% 
   group_by(carrier) %>% 
