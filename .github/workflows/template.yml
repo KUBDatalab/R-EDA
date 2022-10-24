@@ -56,7 +56,7 @@ jobs:
           fi
 
       - name: Checkout the ${{ matrix.lesson }} lesson
-        uses: actions/checkout@master
+        uses: actions/checkout@main
         with:
           repository: ${{ matrix.lesson }}
           path: lesson
