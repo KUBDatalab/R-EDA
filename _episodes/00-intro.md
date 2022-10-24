@@ -19,6 +19,11 @@ source: Rmd
 
 
 
+PLEASE NOTE! THIS IS A GENERAL INTRODUCTORY COURSE WEBSITE TO R. 
+
+IT IS NOT THE NOTES THAT WE ARE FOLLOWING ON THE COURSE ON OCTOBER 30TH YET.
+
+
 ## What is R? What is RStudio?
 
 The term "`R`" is used to refer to both the programming language and the
@@ -111,10 +116,10 @@ freely available to extend R's native capabilities.
 <figure>
 <div class="row">
 <div class="col-md-6">
-<img src="../fig/r-manual.jpeg" title="RStudio extends what R can do, and makes it easier to write R code and interact with R." alt="RStudio extends what R can do, and makes it easier to write R code and interact with R." width="100%" style="display: block; margin: auto;" />
+<img src="../fig/r-manual.jpeg" alt="RStudio extends what R can do, and makes it easier to write R code and interact with R." width="100%" style="display: block; margin: auto;" />
 </div>
 <div class="col-md-6">
-<img src="../fig/r-automatic.jpeg" title="automatic car gear shift representing the ease of RStudio" alt="automatic car gear shift representing the ease of RStudio" width="100%" style="display: block; margin: auto;" />
+<img src="../fig/r-automatic.jpeg" alt="automatic car gear shift representing the ease of RStudio" width="100%" style="display: block; margin: auto;" />
 </div>
 </div>
 <figcaption>
