@@ -17,7 +17,7 @@ knitr::opts_chunk$set(fig.width = 3,
 
 This document contains all of the functions that were covered in the 
 _Introduction to R_ workshop. Each function is presented alongside an example of
-how it can be used. 
+how it can be used.  
 
 Why?
 ## Creating Objects 
