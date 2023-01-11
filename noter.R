@@ -3,13 +3,16 @@
 
 download.file("https://raw.githubusercontent.com/KUBDatalab/R-intro/main/data/flightdata.xlsx",
               "flightdata.xlsx", mode = "wb")
-
+<- 
 #install.packages("readxl")
 library(readxl)
-
+?flights
 read_excel("flightdata.xlsx")
 data <- read_excel("data/flightdata.xlsx")
 library(tidyverse)
+
+summary(data)
+data %>% filter(dep_delay == 0)
 
 data %>% 
   sample_frac(.005)
@@ -79,21 +82,21 @@ data %>% select(dep_delay) %>%
 
 # hvad er så forsinkelse på ankomst?
 data %>% 
-  summarise(gennemsnit_forsinket_afgang = mean(dep_delay, na.rm =T),
-            gennemsnit_forsinket_ankomst = mean(arr_delay, na.rm=T))
+  summarise(avg_del_departure = mean(dep_delay, na.rm =T),
+            avg_del_arrival = mean(arr_delay, na.rm=T))
 
 
 #måske kunne det være se hvordan det variere fra flyselskab til flyselskab
 data %>%
   group_by(carrier) %>% 
-  summarise(gennemsnit_forsinket_afgang = mean(dep_delay, na.rm =T),
-            gennemsnit_forsinket_ankomst = mean(arr_delay, na.rm=T)) 
+  summarise(avg_del_departure = mean(dep_delay, na.rm =T),
+            avg_del_arrival = mean(arr_delay, na.rm=T)) 
 
 # filtrering
 data %>%
   group_by(carrier) %>% 
-  summarise(gennemsnit_forsinket_afgang = mean(dep_delay, na.rm =T),
-            gennemsnit_forsinket_ankomst = mean(arr_delay, na.rm=T)) %>% 
+  summarise(avg_del_departure = mean(dep_delay, na.rm =T),
+            avg_del_arrival = mean(arr_delay, na.rm=T)) %>% 
   filter(gennemsnit_forsinket_afgang < 20 ) 
 
 
@@ -104,8 +107,8 @@ data %>%
 
 data %>%
   group_by(carrier) %>% 
-  summarise(gennemsnit_forsinket_afgang = mean(dep_delay, na.rm =T),
-            gennemsnit_forsinket_ankomst = mean(arr_delay, na.rm=T)) %>% 
+  summarise(avg_del_departure = mean(dep_delay, na.rm =T),
+            avg_del_arrival = mean(arr_delay, na.rm=T)) %>% 
   filter(gennemsnit_forsinket_afgang < 20 ) %>% 
   pull(gennemsnit_forsinket_afgang)
 
@@ -122,8 +125,8 @@ data %>%
 
 data %>%
   group_by(carrier) %>% 
-  summarise(gennemsnit_forsinket_afgang = mean(dep_delay, na.rm =T),
-            gennemsnit_forsinket_ankomst = mean(arr_delay, na.rm=T)) %>% 
+  summarise(avg_del_departure = mean(dep_delay, na.rm =T),
+            avg_del_arrival = mean(arr_delay, na.rm=T)) %>% 
   filter(gennemsnit_forsinket_afgang < 20 ) %>% 
   filter(gennemsnit_forsinket_ankomst < 15)
 
@@ -131,16 +134,16 @@ data %>%
 # Eller! 
 data %>%
   group_by(carrier) %>% 
-  summarise(gennemsnit_forsinket_afgang = mean(dep_delay, na.rm =T),
-            gennemsnit_forsinket_ankomst = mean(arr_delay, na.rm=T)) %>% 
+  summarise(avg_del_departure = mean(dep_delay, na.rm =T),
+            avg_del_arrival = mean(arr_delay, na.rm=T)) %>% 
   filter(gennemsnit_forsinket_afgang < 20 ,  
          gennemsnit_forsinket_ankomst < 15)
 
 # Men nok en god ide at!
 data %>%
   group_by(carrier) %>% 
-  summarise(gennemsnit_forsinket_afgang = mean(dep_delay, na.rm =T),
-            gennemsnit_forsinket_ankomst = mean(arr_delay, na.rm=T)) %>% 
+  summarise(avg_del_departure = mean(dep_delay, na.rm =T),
+            avg_del_arrival = mean(arr_delay, na.rm=T)) %>% 
   filter(gennemsnit_forsinket_afgang < 20 &   
          gennemsnit_forsinket_afgang > 15)
 
@@ -154,8 +157,8 @@ data %>%
 # Hvad med eller? Hvem har forsinkelser mellem 10 og 20 minutter?
 data %>%
   group_by(carrier) %>% 
-  summarise(gennemsnit_forsinket_afgang = mean(dep_delay, na.rm =T),
-            gennemsnit_forsinket_ankomst = mean(arr_delay, na.rm=T)) %>% 
+  summarise(avg_del_departure = mean(dep_delay, na.rm =T),
+            avg_del_arrival = mean(arr_delay, na.rm=T)) %>% 
   filter(gennemsnit_forsinket_afgang > 20 |   
            gennemsnit_forsinket_afgang < 15)
 
@@ -174,8 +177,8 @@ acceptabel_forsinkelse_afgang <- acceptabel_forsinkelse_ankomst - 5
 
 data %>%
   group_by(carrier) %>% 
-  summarise(gennemsnit_forsinket_afgang = mean(dep_delay, na.rm =T),
-            gennemsnit_forsinket_ankomst = mean(arr_delay, na.rm=T)) %>% 
+  summarise(avg_del_departure = mean(dep_delay, na.rm =T),
+            avg_del_arrival = mean(arr_delay, na.rm=T)) %>% 
   filter(gennemsnit_forsinket_afgang < acceptabel_forsinkelse_afgang) %>% 
   filter(gennemsnit_forsinket_ankomst < acceptabel_forsinkelse_ankomst)
 
@@ -190,8 +193,8 @@ acceptabel_forsinkelse_ankomst <- 10
 # "genbruge" resultatet af ting vi har gjort
 forsinkelser <- data %>%
   group_by(carrier) %>% 
-  summarise(gennemsnit_forsinket_afgang = mean(dep_delay, na.rm =T),
-            gennemsnit_forsinket_ankomst = mean(arr_delay, na.rm=T)) 
+  summarise(avg_del_departure = mean(dep_delay, na.rm =T),
+            avg_del_arrival = mean(arr_delay, na.rm=T)) 
 forsinkelser
 
 #kan de to gennemsnit visualiseres 
@@ -215,7 +218,7 @@ forsinkelser %>%
 data %>% 
   group_by(carrier) %>% 
   summarise(gennemsnitlig_forsinket_afgang = mean(dep_delay, na.rm = TRUE),
-            gennemsnit_forsinket_ankomst = mean(arr_delay, na.rm=T),
+            avg_del_arrival = mean(arr_delay, na.rm=T),
             manglende_departure = sum(is.na(dep_delay)),
             antal_values = n(),
             andel_departure = manglende_departure/antal_values*100)
@@ -229,7 +232,7 @@ data %>%
 data %>% 
   group_by(carrier) %>% 
   summarise(gennemsnitlig_forsinket_afgang = mean(dep_delay, na.rm = TRUE),
-            gennemsnit_forsinket_ankomst = mean(arr_delay, na.rm=T),
+            avg_del_arrival = mean(arr_delay, na.rm=T),
             proportion_departure = sum(is.na(dep_delay))/n()*100,
             proportion_arrival = sum(is.na(arr_delay))/n()*100)
 
@@ -241,7 +244,7 @@ data %>%
 data %>% 
   group_by(carrier) %>% 
   summarise(gennemsnitlig_forsinket_afgang = mean(dep_delay, na.rm = TRUE),
-            gennemsnit_forsinket_ankomst = mean(arr_delay, na.rm=T),
+            avg_del_arrival = mean(arr_delay, na.rm=T),
             proportion_departure = sum(is.na(dep_delay))/n()*100,
             proportion_arrival = sum(is.na(arr_delay))/n()*100) %>% 
   arrange(proportion_departure, proportion_arrival)
@@ -313,7 +316,7 @@ airlines %>%  filter(carrier == "F9" | carrier == "AS")
 data %>% 
   group_by(carrier) %>% 
   summarise(gennemsnitlig_forsinket_afgang = mean(dep_delay, na.rm = TRUE),
-            gennemsnit_forsinket_ankomst = mean(arr_delay, na.rm=T),
+            avg_del_arrival = mean(arr_delay, na.rm=T),
             proportion_departure = sum(is.na(dep_delay))/n()*100,
             proportion_arrival = sum(is.na(arr_delay))/n()*100) %>% 
   left_join(airlines, by = c("carrier" = "carrier"))
@@ -322,7 +325,7 @@ data %>%
 data %>% 
   group_by(carrier) %>% 
   summarise(gennemsnitlig_forsinket_afgang = mean(dep_delay, na.rm = TRUE),
-            gennemsnit_forsinket_ankomst = mean(arr_delay, na.rm=T),
+            avg_del_arrival = mean(arr_delay, na.rm=T),
             proportion_departure = sum(is.na(dep_delay))/n()*100,
             proportion_arrival = sum(is.na(arr_delay))/n()*100) %>% 
   left_join(airlines, by = c("carrier" = "carrier")) %>% 
@@ -333,7 +336,7 @@ data %>%
 data %>% 
   group_by(carrier) %>% 
   summarise(gennemsnitlig_forsinket_afgang = mean(dep_delay, na.rm = TRUE),
-            gennemsnit_forsinket_ankomst = mean(arr_delay, na.rm=T),
+            avg_del_arrival = mean(arr_delay, na.rm=T),
             proportion_departure = sum(is.na(dep_delay))/n()*100,
             proportion_arrival = sum(is.na(arr_delay))/n()*100) %>% 
   left_join(airlines, by = c("carrier" = "carrier")) %>% 
@@ -353,7 +356,7 @@ data %>%
 data %>% 
   group_by(carrier) %>% 
   summarise(gennemsnitlig_forsinket_afgang = mean(dep_delay, na.rm = TRUE),
-            gennemsnit_forsinket_ankomst = mean(arr_delay, na.rm=T),
+            avg_del_arrival = mean(arr_delay, na.rm=T),
             proportion_departure = sum(is.na(dep_delay))/n()*100,
             proportion_arrival = sum(is.na(arr_delay))/n()*100) %>% 
   left_join(airlines, by = c("carrier" = "carrier")) %>% 
@@ -373,7 +376,7 @@ data %>%
 data %>% 
   group_by(carrier) %>% 
   summarise(gennemsnitlig_forsinket_afgang = mean(dep_delay, na.rm = TRUE),
-            gennemsnit_forsinket_ankomst = mean(arr_delay, na.rm=T),
+            avg_del_arrival = mean(arr_delay, na.rm=T),
             proportion_departure = sum(is.na(dep_delay))/n()*100,
             proportion_arrival = sum(is.na(arr_delay))/n()*100) %>% 
   left_join(airlines, by = c("carrier" = "carrier")) %>% 
@@ -391,7 +394,7 @@ data %>%
 data %>% 
   group_by(carrier) %>% 
   summarise(gennemsnitlig_forsinket_afgang = mean(dep_delay, na.rm = TRUE),
-            gennemsnit_forsinket_ankomst = mean(arr_delay, na.rm=T),
+            avg_del_arrival = mean(arr_delay, na.rm=T),
             proportion_departure = sum(is.na(dep_delay))/n()*100,
             proportion_arrival = sum(is.na(arr_delay))/n()*100) %>% 
   left_join(airlines, by = c("carrier" = "carrier")) %>% 

@@ -40,52 +40,10 @@ flightdata <- read_excel("data/flightdata.xlsx")
 ~~~
 {: .language-r}
 
-`<-` is the assignment operator. It assigns values on the right to objects on
-the left. So, after executing `x <- read_excel("data/flightdata.xlsx")`, 
-the value of `x` is `read_excel("data/flightdata.xlsx")`. The arrow can
-be read as read_excel("data/flightdata.xlsx") **goes into** `x`.  For historical reasons, you can also use `=`
-for assignments, but not in every context.
-
-In RStudio, typing <kbd>Alt</kbd> + <kbd>-</kbd> (push <kbd>Alt</kbd> at the
-same time as the <kbd>-</kbd> key) will write `<- ` in a single keystroke in a
-PC, while typing <kbd>Option</kbd> + <kbd>-</kbd> (push <kbd>Option</kbd> at the
-same time as the <kbd>-</kbd> key) does the same in a Mac.
-
-Objects can be given any name such as `x`, `current_temperature`, or
-`subject_id`. You want your object names to be explicit and not too long. They
-cannot start with a number (`2x` is not valid, but `x2` is). R is case sensitive
-(e.g., `age` is different from `Age`). There are some names that
-cannot be used because they are the names of fundamental objects in R (e.g.,
-`if`, `else`, `for`, see
-[here](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Reserved.html)
-for a complete list). In general, even if it's allowed, it's best to not use
-them (e.g., `c`, `T`, `mean`, `data`, `df`, `weights`). If in
-doubt, check the help to see if the name is already in use. It's also best to
-avoid dots (`.`) within an object name as in `my.dataset`. There are many
-objects in R with dots in their names for historical reasons, but because dots
-have a special meaning in R (for methods) and other programming languages, it's
-best to avoid them. It is also recommended to use nouns for object names, and
-verbs for function names. It's important to be consistent in the styling of your
-code (where you put spaces, how you name objects, etc.). Using a consistent
-coding style makes your code clearer to read for your future self and your
-collaborators. In R, three popular style guides are
-[Google's](https://google.github.io/styleguide/Rguide.xml), [Jean
-Fan's](http://jef.works/R-style-guide/) and the
-[tidyverse's](http://style.tidyverse.org/). The tidyverse's is very
-comprehensive and may seem overwhelming at first. You can install the
-[**`lintr`**](https://github.com/jimhester/lintr) package to automatically check
-for issues in the styling of your code.
-
-> ## Objects vs. variables
->
-> What are known as `objects` in `R` are known as `variables` in many other
-> programming languages. Depending on the context, `object` and `variable` can
-> have drastically different meanings. However, in this lesson, the two words
-> are used synonymously. For more information see:
-> [https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Objects](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Objects)
-{: .callout}
 
 # Taking a look at the data
+
+Always begin by taking a look at your data!
 
 
 ~~~
@@ -93,19 +51,97 @@ Error in flightdata %>% sample_frac(0.005) %>% view(): could not find function "
 ~~~
 {: .error}
 
-The %>% is a pipe. It takes whatever is on the left hand side of it, and 
-passes it to whatever is on the right hand side. 
+In this case it is the function sample_frac() that takes the input, flightdata, and returns a random fraction of the data. 0.005 in this case. 
+The dataset is pretty large. 
 
-In this case it is the function sample_frac() that takes the input, flightdata,
-and returns a random fraction of the data. 0.005 in this case. 
+The summary function returns summary statistics on our data:
 
-We write the fraction we want as an argument to the function.
+~~~
+summary(flightdata)
+~~~
+{: .language-r}
 
-We do that because the data is pretty large. We then use a second pipe to 
-pass that to the view() function, that shows us the data in a nice format that
-is easier to read.
 
-Here we are going to take a look at the data structure.
+
+~~~
+      year          month             day           dep_time    sched_dep_time
+ Min.   :2013   Min.   : 1.000   Min.   : 1.00   Min.   :   1   Min.   : 106  
+ 1st Qu.:2013   1st Qu.: 4.000   1st Qu.: 8.00   1st Qu.: 907   1st Qu.: 906  
+ Median :2013   Median : 7.000   Median :16.00   Median :1401   Median :1359  
+ Mean   :2013   Mean   : 6.549   Mean   :15.71   Mean   :1349   Mean   :1344  
+ 3rd Qu.:2013   3rd Qu.:10.000   3rd Qu.:23.00   3rd Qu.:1744   3rd Qu.:1729  
+ Max.   :2013   Max.   :12.000   Max.   :31.00   Max.   :2400   Max.   :2359  
+                                                 NA's   :8255                 
+   dep_delay          arr_time    sched_arr_time   arr_delay       
+ Min.   : -43.00   Min.   :   1   Min.   :   1   Min.   : -86.000  
+ 1st Qu.:  -5.00   1st Qu.:1104   1st Qu.:1124   1st Qu.: -17.000  
+ Median :  -2.00   Median :1535   Median :1556   Median :  -5.000  
+ Mean   :  12.64   Mean   :1502   Mean   :1536   Mean   :   6.895  
+ 3rd Qu.:  11.00   3rd Qu.:1940   3rd Qu.:1945   3rd Qu.:  14.000  
+ Max.   :1301.00   Max.   :2400   Max.   :2359   Max.   :1272.000  
+ NA's   :8255      NA's   :8713                  NA's   :9430      
+   carrier              flight       tailnum             origin         
+ Length:336776      Min.   :   1   Length:336776      Length:336776     
+ Class :character   1st Qu.: 553   Class :character   Class :character  
+ Mode  :character   Median :1496   Mode  :character   Mode  :character  
+                    Mean   :1972                                        
+                    3rd Qu.:3465                                        
+                    Max.   :8500                                        
+                                                                        
+     dest              air_time        distance         hour      
+ Length:336776      Min.   : 20.0   Min.   :  17   Min.   : 1.00  
+ Class :character   1st Qu.: 82.0   1st Qu.: 502   1st Qu.: 9.00  
+ Mode  :character   Median :129.0   Median : 872   Median :13.00  
+                    Mean   :150.7   Mean   :1040   Mean   :13.18  
+                    3rd Qu.:192.0   3rd Qu.:1389   3rd Qu.:17.00  
+                    Max.   :695.0   Max.   :4983   Max.   :23.00  
+                    NA's   :9430                                  
+     minute        time_hour                     
+ Min.   : 0.00   Min.   :2013-01-01 10:00:00.00  
+ 1st Qu.: 8.00   1st Qu.:2013-04-04 17:00:00.00  
+ Median :29.00   Median :2013-07-03 14:00:00.00  
+ Mean   :26.23   Mean   :2013-07-03 09:22:54.64  
+ 3rd Qu.:44.00   3rd Qu.:2013-10-01 11:00:00.00  
+ Max.   :59.00   Max.   :2014-01-01 04:00:00.00  
+                                                 
+~~~
+{: .output}
+
+
+~~~
+flightdata %>% 
+  filter(dep_delay == 0) %>% 
+  nrow()
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in flightdata %>% filter(dep_delay == 0) %>% nrow(): could not find function "%>%"
+~~~
+{: .error}
+
+
+What is actually contained in this dataset, what are the meaning of 
+the column names?
+
+* year, month, day Date of departure.
+* dep_time, arr_time Actual departure and arrival times (format HHMM or HMM), local tz.
+* sched_dep_time, sched_arr_time Scheduled departure and arrival times (format HHMM or HMM), local tz.
+* dep_delay, arr_delay Departure and arrival delays, in minutes. Negative times represent early departures/arrivals.
+* carrier Two letter carrier abbreviation. See airlines to get name.
+* flight Flight number.
+* tailnum Plane tail number. See planes for additional metadata.
+* origin, dest Origin and destination. See airports for additional metadata.
+* air_time Amount of time spent in the air, in minutes.
+* distance Distance between airports, in miles.
+* hour, minute Time of scheduled departure broken into hour and minutes.
+* time_hour Scheduled date and hour of the flight as a POSIXct date. Along with origin, can be used to join flights data to weather data.
+
+Always remember to save information about what is actually in your 
+data. This is called metadata, data that describes data. 
+
 
 ## Let us make a plot
 
@@ -127,150 +163,10 @@ Error in flightdata %>% sample_frac(0.005) %>% ggplot(mapping = aes(x = dep_dela
 
 Note that the pipe is not a pipe in plots. Its a +.
 
-Mapping denotes which values from the data, should be mapped to something in 
-the plot. The "somethings" depends on the type of plot. We are making a 
-scatter plot, using geom_point, because we are plotting points. They have
-a minimum requirement of x and y.
+Mapping denotes which values from the data, should be mapped to 
+something in the plot. The "somethings" depends on the type of plot. We are making a scatter plot, using geom_point, because we are plotting points. They have a minimum requirement of x and y.
 
 
-
-
-
-
-### Functions and their arguments
-
-Functions are "canned scripts" that automate more complicated sets of commands
-including operations assignments, etc. Many functions are predefined, or can be
-made available by importing R *packages* (more on that later). A function
-usually gets one or more inputs called *arguments*. Functions often (but not
-always) return a *value*. A typical example would be the function `sqrt()`. The
-input (the argument) must be a number, and the return value (in fact, the
-output) is the square root of that number. Executing a function ('running it')
-is called *calling* the function. An example of a function call is:
-
-
-~~~
-b <- sqrt(a)
-~~~
-{: .language-r}
-Here, the value of `a` is given to the `sqrt()` function, the `sqrt()` function
-calculates the square root, and returns the value which is then assigned to
-the object `b`. This function is very simple, because it takes just one argument.
-
-The return 'value' of a function need not be numerical (like that of `sqrt()`),
-and it also does not need to be a single item: it can be a set of things, or
-even a dataset. We'll see that when we read data files into R.
-
-Arguments can be anything, not only numbers or filenames, but also other
-objects. Exactly what each argument means differs per function, and must be
-looked up in the documentation (see below). Some functions take arguments which
-may either be specified by the user, or, if left out, take on a *default* value:
-these are called *options*. Options are typically used to alter the way the
-function operates, such as whether it ignores 'bad values', or what symbol to
-use in a plot.  However, if you want something specific, you can specify a value
-of your choice which will be used instead of the default.
-
-Let's try a function that can take multiple arguments: `round()`.
-
-
-~~~
-round(3.14159)
-~~~
-{: .language-r}
-
-
-
-~~~
-[1] 3
-~~~
-{: .output}
-
-
-Here, we've called `round()` with just one argument, `3.14159`, and it has
-returned the value `3`.  That's because the default is to round to the nearest
-whole number. If we want more digits we can see how to do that by getting
-information about the `round` function.  We can use `args(round)` or look at the
-help for this function using `?round`.
-
-
-~~~
-args(round)
-~~~
-{: .language-r}
-
-
-
-~~~
-function (x, digits = 0) 
-NULL
-~~~
-{: .output}
-
-
-~~~
-?round
-~~~
-{: .language-r}
-
-We see that if we want a different number of digits, we can
-type `digits=2` or however many we want.
-
-
-~~~
-round(3.14159, digits = 2)
-~~~
-{: .language-r}
-
-
-
-~~~
-[1] 3.14
-~~~
-{: .output}
-
-If you provide the arguments in the exact same order as they are defined you
-don't have to name them:
-
-
-~~~
-round(3.14159, 2)
-~~~
-{: .language-r}
-
-
-
-~~~
-[1] 3.14
-~~~
-{: .output}
-
-And if you do name the arguments, you can switch their order:
-
-
-~~~
-round(digits = 2, x = 3.14159)
-~~~
-{: .language-r}
-
-
-
-~~~
-[1] 3.14
-~~~
-{: .output}
-
-It's good practice to put the non-optional arguments (like the number you're
-rounding) first in your function call, and to specify the names of all optional
-arguments.  If you don't, someone reading your code might have to look up the
-definition of a function with unfamiliar arguments to understand what you're
-doing.
-
-> ## Exercise
->
-> Type in `?round` at the console and then look at the output in the Help pane.
-> What other functions exist that are similar to `round`?
-> How do you use the `digits` parameter in the round function?
-{: .challenge}
 
 
 
