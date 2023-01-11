@@ -19,17 +19,6 @@ see the [**`tidyverse`** website](https://tidyverse.tidyverse.org) for more deta
 Follow the instructions below for your operating system, and then follow the 
 instructions to install **`tidyverse`**.
 
-### Online
-
-Rather than installing R and RStudio on your personal computer, 
-[Rstudio Cloud](https://rstudio.cloud/) offers a free, online alternative,
-where you will be able to run R and RStudio in your browser. 
-Sign up with your Google/Gmail account if you have one, or with any other email.
-
-The free version of RStudio Cloud places limitations on the number of projects you
-can work on, and the amount of memory and processing power you can access. For the 
-purposes of following these lessons, RStudio Cloud is perfectly adequate, and what we
-recommend if you have any problems installing R and RStudio on your personal computer.
 
 ### Windows
 
@@ -51,9 +40,9 @@ recommend if you have any problems installing R and RStudio on your personal com
 * Download R from
   the [CRAN website](http://cran.r-project.org/bin/windows/base/release.htm).
 * Run the `.exe` file that was just downloaded.
-* Go to the [RStudio download page](https://www.rstudio.com/products/rstudio/download/#download).
-* Under *Installers* select **RStudio x.yy.zzz - Windows.
-  Vista/7/8/10** (where x, y, and z represent version numbers).
+* Go to the [RStudio download page](https://posit.co/download/rstudio-desktop/#download).
+* The site will attempt to guess the correct version depending on your computer.
+  If the guess is wrong, find the correct version at the bottom of the page
 * Double click the file to install it.
 * Once it's installed, open RStudio to make sure it works and you don't get any
   error messages.
@@ -69,7 +58,7 @@ recommend if you have any problems installing R and RStudio on your personal com
   that appears on the terminal indicates the version of R you are running. Alternatively, you can type `sessionInfo()`, which will also display which version of R you are running. Go on
   the [CRAN website](https://cran.r-project.org/bin/macosx/) and check
   whether a more recent version is available. If so, please download and install
-  it. In any case, make sure you have at least R 3.2.
+  it. In any case, make sure you have at least R 3.3.
 
 #### If you don't have R and RStudio installed
 
@@ -79,10 +68,10 @@ recommend if you have any problems installing R and RStudio on your personal com
 * Double click on the downloaded file to install R.
 * It is also a good idea to install [XQuartz](https://www.xquartz.org/) (needed
   by some packages).
-* Go to the [RStudio download page](https://www.rstudio.com/products/rstudio/download/#download).
-* Under *Installers* select **RStudio x.yy.zzz - Mac OS X 10.6+ (64-bit)**
-  (where x, y, and z represent version numbers).
-* Double click the file to install RStudio.
+* Go to the [RStudio download page](https://posit.co/download/rstudio-desktop/#download).
+* The site will attempt to guess the correct version depending on your computer.
+  If the guess is wrong, find the correct version at the bottom of the page
+* Double click the file to install it.
 * Once it's installed, open RStudio to make sure it works and you don't get any
   error messages.
 
@@ -95,20 +84,34 @@ recommend if you have any problems installing R and RStudio on your personal com
   distributions, you could use your package manager (e.g., for Debian/Ubuntu run
   `sudo apt-get install r-base`, and for Fedora `sudo yum install R`), but we
   don't recommend this approach as the versions provided by this approach are
-  usually out of date. In any case, make sure you have at least R 3.2.
-* Go to the
-  [RStudio download page](https://www.rstudio.com/products/rstudio/download/#download).
-* Under *Installers* select the version that matches your distribution, and
-  install it with your preferred method (e.g., with Debian/Ubuntu `sudo dpkg -i
-  rstudio-x.yy.zzz-amd64.deb` at the terminal).
+  usually out of date. In any case, make sure you have at least R 3.3.
+* Go to the [RStudio download page](https://posit.co/download/rstudio-desktop/#download).
+* The site will attempt to guess the correct version depending on your computer.
+  If the guess is wrong, find the correct version at the bottom of the page
+* Double click the file to install it.
 * Once it's installed, open RStudio to make sure it works and you don't get any
   error messages.
+
+### Online
+
+The company behind RStudio offers a free cloudbased instance of RStudio at 
+[Posit Cloud](https://posit.cloud/). 
+where you will be able to run R and RStudio in your browser. 
+Sign up with your Google/Gmail account if you have one, or with any other email.
+
+The free version of Posit Cloud places limitations on the number of projects you
+can work on, and the amount of memory and processing power you can access. 
+
+Due to the size of the dataset used in this workshop, Posit Cloud is not an 
+alternative to installing R and Rstudio on you own computer.
 
 
 ### For all
 
 **Data used**
 
-https://raw.githubusercontent.com/KUBDatalab/beginning-R/main/data/SAFI_clean.csv
+https://raw.githubusercontent.com/KUBDatalab/beginning-R/main/data/flightdata.xlsx
 
 You do not need to download the file. We will do that together during the course.
+
+
