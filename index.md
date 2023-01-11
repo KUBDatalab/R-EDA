@@ -3,8 +3,7 @@ layout: lesson
 root: .
 ---
 
-Please note: These pages are under construction! That is a permanent condition,
-but at the moment they are under more construction than they will ever be.
+Please note: These pages are under construction! That is a permanent condition, but at the moment they are under more construction than they will ever be.
 
 The aim of KUB-Datalab is to teach students, teachers and researchers
 basic concepts, skills and tools for working with data so they can
