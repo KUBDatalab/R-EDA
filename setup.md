@@ -110,7 +110,7 @@ alternative to installing R and Rstudio on you own computer.
 
 **Data used**
 
-https://raw.githubusercontent.com/KUBDatalab/beginning-R/main/data/flightdata.xlsx
+https://raw.githubusercontent.com/KUBDatalab/R-EDA/main/data/flightdata.xlsx
 
 You do not need to download the file. We will do that together during the course.
 

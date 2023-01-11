@@ -5,58 +5,29 @@ title: "Before we Start"
 teaching: 10
 exercises: 5
 questions:
-- "How to find your way around RStudio?"
-- "How to interact with R?"
-- "How to manage your environment?"
+- "What is EDA?"
+- "How to get ready to do data analysis?"
+- "How to get the data we are working with?"
 objectives:
-- "Install latest version of R."
-- "Install latest version of RStudio."
-- "Navigate the RStudio GUI."
+- "Make sure tidyverse is updated."
+- "Make a new project."
+- "Organize your folders."
+- "Download the data."
 keypoints:
-- "Use RStudio to write and run R programs."
+- "A good project is an organized project"
 source: Rmd
 ---
 
 
 
-PLEASE NOTE! THIS IS A GENERAL INTRODUCTORY COURSE WEBSITE TO R. 
+## What is EDA?
 
-IT IS NOT THE NOTES THAT WE ARE FOLLOWING ON THE COURSE ON OCTOBER 30TH YET.
+EDA stands for Exploratory Data Analysis. It is a process of analyzing and summarizing a dataset in order to understand its main characteristics, such as the distribution of variables, the presence of outliers, and the relationship between different variables. 
 
-
-## What is R? What is RStudio?
-
-The term "`R`" is used to refer to both the programming language and the
-software that interprets the scripts written using it.
-
-[RStudio](https://rstudio.com) is currently a very popular way to not only write
-your R scripts but also to interact with the R software. To function correctly,
-RStudio needs R and therefore both need to be installed on your computer.
-
-To make it easier to interact with R, we will use RStudio. RStudio is the most
-popular IDE (Integrated Development Environmemt) for R. An IDE is a piece of
-software that provides tools to make programming easier.
+In R, EDA typically involves using a combination of visual and quantitative methods to explore and summarize the data, such as creating histograms, scatter plots, and summary statistics, which can be done using a variety of R packages such as ggplot2 and dplyr.
 
 
-## Why learn R?
-
-### R does not involve lots of pointing and clicking, and that's a good thing
-
-The learning curve might be steeper than with other software, but with R, the
-results of your analysis do not rely on remembering a succession of pointing
-and clicking, but instead on a series of written commands, and that's a good
-thing! So, if you want to redo your analysis because you collected more data,
-you don't have to remember which button you clicked in which order to obtain
-your results; you just have to run your script again.
-
-Working with scripts makes the steps you used in your analysis clear, and the
-code you write can be inspected by someone else who can give you feedback and
-spot mistakes.
-
-Working with scripts forces you to have a deeper understanding of what you are
-doing, and facilitates your learning and comprehension of the methods you use.
-
-### R code is great for reproducibility
+## R code is great for reproducibility
 
 Reproducibility is when someone else (including your future self) can obtain the
 same results from the same dataset when using the same analysis.
@@ -64,93 +35,6 @@ same results from the same dataset when using the same analysis.
 R integrates with other tools to generate manuscripts from your code. If you
 collect more data, or fix a mistake in your dataset, the figures and the
 statistical tests in your manuscript are updated automatically.
-
-An increasing number of journals and funding agencies expect analyses to be
-reproducible, so knowing R will give you an edge with these requirements.
-
-### R is interdisciplinary and extensible
-
-With 18,000+ packages that can be installed to extend its capabilities, R
-provides a framework that allows you to combine statistical approaches from many
-scientific disciplines to best suit the analytical framework you need to analyze
-your data. For instance, R has packages for image analysis, GIS, time series,
-population genetics, and a lot more.
-
-### R works on data of all shapes and sizes
-
-The skills you learn with R scale easily with the size of your dataset. Whether
-your dataset has hundreds or millions of lines, it won't make much difference to
-you.
-
-R is designed for data analysis. It comes with special data structures and data
-types that make handling of missing data and statistical factors convenient.
-
-R can connect to spreadsheets, databases, and many other data formats, on your
-computer or on the web.
-
-### R produces high-quality graphics
-
-The plotting functionalities in R are endless, and allow you to adjust any
-aspect of your graph to convey most effectively the message from your data.
-
-### R has a large and welcoming community
-
-Thousands of people use R daily. Many of them are willing to help you through
-mailing lists and websites such as [Stack Overflow](https://stackoverflow.com/),
-or on the [RStudio community](https://community.rstudio.com/). Questions which
-are backed up with [short, reproducible code
-snippets](https://www.tidyverse.org/help/) are more likely to attract
-knowledgeable responses.
-
-### Not only is R free, but it is also open-source and cross-platform
-
-Anyone can inspect the source code to see how R works. Because of this
-transparency, there is less chance for mistakes, and if you (or someone else)
-find some, you can report and fix bugs.
-
-Because R is open source and is supported by a large community of developers and
-users, there is a very large selection of third-party add-on packages which are
-freely available to extend R's native capabilities.
-
-
-<figure>
-<div class="row">
-<div class="col-md-6">
-<img src="../fig/r-manual.jpeg" alt="RStudio extends what R can do, and makes it easier to write R code and interact with R." width="100%" style="display: block; margin: auto;" />
-</div>
-<div class="col-md-6">
-<img src="../fig/r-automatic.jpeg" alt="automatic car gear shift representing the ease of RStudio" width="100%" style="display: block; margin: auto;" />
-</div>
-</div>
-<figcaption>
-RStudio extends what R can do, and makes it easier to write R code and interact
-with R. <a href="https://unsplash.com/photos/D19rXKDUPYM">Left photo credit</a>; <a href="https://unsplash.com/photos/Wec3M4dY_LE">Right photo credit</a>.
-</figcaption>
-</figure>
-
-
-## A tour of RStudio
-
-## Knowing your way around RStudio
-
-Let's start by learning about [RStudio](https://www.rstudio.com/), which is an
-Integrated Development Environment (IDE) for working with R.
-
-The RStudio IDE open-source product is free under the
-[Affero General Public License (AGPL) v3](https://www.gnu.org/licenses/agpl-3.0.en.html).
-The RStudio IDE is also available with a commercial license and priority email
-support from RStudio, Inc.
-
-We will use the RStudio IDE to write code, navigate the files on our computer,
-inspect the variables we create, and visualize the plots we generate. RStudio
-can also be used for other things (e.g., version control, developing packages,
-writing Shiny apps) that we will not cover during the workshop.
-
-One of the advantages of using RStudio is that all the information
-you need to write code is available in a single window. Additionally, RStudio
-provides many shortcuts, autocompletion, and highlighting for the major file
-types you use while developing in R. RStudio makes typing easier and less
-error-prone.
 
 
 ## Getting set up
@@ -193,23 +77,6 @@ open to its own project directory. This allows you to keep multiple projects
 open without them interfering with each other.
 
 
-### The RStudio Interface
-
-Let's take a quick tour of RStudio.
-
-![RStudio_startup](../fig/R_00_Rstudio_01.png)
-
-RStudio is divided into four "panes". The placement of these
-panes and their content can be customized (see menu, Tools -> Global Options ->
-Pane Layout).
-
-The Default Layout is:
-- Top Left - **Source**: your scripts and documents
-- Bottom Left - **Console**: what R would look and be like without RStudio
-- Top Right - **Enviornment/History**: look here to see what you have done
-- Bottom Right - **Files** and more: see the contents of the project/working
-directory here, like your Script.R file
-
 
 ### Organizing your working directory
 
@@ -241,7 +108,7 @@ needs, but these should form the backbone of your working directory.
 ![Example of a working directory structure](../fig/rstudio_project_files.jpeg)
 
 
-### The working directory
+#### The working directory
 
 The working directory is an important concept to understand. It is the place
 where R will look for and save files. When you write code for your project, your
@@ -255,60 +122,34 @@ project, it is likely that you opened an R script or RMarkdown file **not** your
 `.Rproj` file. You should close out of RStudio and open the `.Rproj` file by 
 double clicking on the blue cube! 
 
-## Interacting with R
 
-The basis of programming is that we write down instructions for the computer to
-follow, and then we tell the computer to follow those instructions. We write, or
-*code*, instructions in R because it is a common language that both the computer
-and we can understand. We call the instructions *commands* and we tell the
-computer to follow the instructions by *executing* (also called *running*) those
-commands.
+## Is everything up to date?
 
-There are two main ways of interacting with R: by using the console or by using
-script files (plain text files that contain your code). The console pane (in
-RStudio, the bottom left panel) is the place where commands written in the R
-language can be typed and executed immediately by the computer. It is also where
-the results will be shown for commands that have been executed. You can type
-commands directly into the console and press <kbd>Enter</kbd> to execute those
-commands, but they will be forgotten when you close the session.
+After setting up our project, it is time to make sure our libraries are 
+up to date.
 
-Because we want our code and workflow to be reproducible, it is better to type
-the commands we want in the script editor and save the script. This way, there
-is a complete record of what we did, and anyone (including our future selves!)
-can easily replicate the results on their computer.
+Run the install.packages() functions on the libraries you are going to use.
+In this case we are going to use the tidyverse packages, and the readxl package
+to import data:
 
-RStudio allows you to execute commands directly from the script editor by using
-the <kbd>Ctrl</kbd> + <kbd>Enter</kbd> shortcut (on Mac, <kbd>Cmd</kbd> +
-<kbd>Return</kbd> will work). The command on the current line in the
-script (indicated by the cursor) or all of the commands in
-selected text will be sent to the console and executed when you press
-<kbd>Ctrl</kbd> + <kbd>Enter</kbd>. If there is information in the console
-you do not need anymore, you can clear it with <kbd>Ctrl</kbd> + <kbd>L</kbd>.
-You can find other keyboard shortcuts in this
-[RStudio cheatsheet about the RStudio IDE](https://github.com/rstudio/cheatsheets/raw/master/rstudio-ide.pdf).
+~~~
+install.packages("tidyverse")
+install.packages("readxl")
+~~~
+{: .language-r}
 
-At some point in your analysis, you may want to check the content of a variable
-or the structure of an object without necessarily keeping a record of it in
-your script. You can type these commands and execute them directly in the
-console.  RStudio provides the <kbd>Ctrl</kbd> + <kbd>1</kbd> and
-<kbd>Ctrl</kbd> + <kbd>2</kbd> shortcuts allow you to jump between the
-script and the console panes.
+## Getting the data
 
-If R is ready to accept commands, the R console shows a `>` prompt. If R
-receives a command (by typing, copy-pasting, or sent from the script editor using
-<kbd>Ctrl</kbd> + <kbd>Enter</kbd>), R will try to execute it and, when
-ready, will show the results and come back with a new `>` prompt to wait for new
-commands.
+Getting the data can be the most time consuming part of any dataanalysis.
 
-If R is still waiting for you to enter more text,
-the console will show a `+` prompt. It means that you haven't finished entering
-a complete command. This is likely because you have not 'closed' a parenthesis or
-quotation, i.e. you don't have the same number of left-parentheses as
-right-parentheses or the same number of opening and closing quotation marks.
-When this happens, and you thought you finished typing your command, click
-inside the console window and press <kbd>Esc</kbd>; this will cancel the
-incomplete command and return you to the `>` prompt. You can then proofread
-the command(s) you entered and correct the error.
+In this workshop, we are going to analyse flight data. Download the data,
+and store it in the data folder you made in your project:
+
+~~~
+download.file("https://raw.githubusercontent.com/KUBDatalab/R-EDA/main/data/flightdata.xlsx", 
+              "data/flightdata.xlsx", mode = "wb")
+~~~
+{: .language-r}
 
 
 {% include links.md %}
