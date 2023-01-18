@@ -109,6 +109,9 @@ needs, but these should form the backbone of your working directory.
 
 ![Example of a working directory structure](../fig/rstudio_project_files.jpeg)
 
+Not all projects needs the entire filestructure, but when analysing data, we 
+strongly recommend that you have at least the `data` folder established as a 
+place to store your original, raw, data.
 
 #### The working directory
 
@@ -142,8 +145,10 @@ install.packages("readxl")
 
 Getting the data can be the most time consuming part of any dataanalysis.
 
-In this workshop, we are going to analyse flight data. Download the data,
-and store it in the data folder you made in your project:
+In this workshop, we are going to analyse flight data. You should already have
+downloaded the data. Move the file to the `data` folder of your project.
+
+If not, you will need to download the data, now:
 ```{r eval = F}
 download.file("https://raw.githubusercontent.com/KUBDatalab/R-EDA/main/data/flightdata.xlsx", 
               "data/flightdata.xlsx", mode = "wb")

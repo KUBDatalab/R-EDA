@@ -2,8 +2,46 @@
 layout: page
 title: Setup
 ---
-
 ## Setup instructions
+
+If you do not have R and Rstudio installed, follow the instructions under the
+heading `Detailed setup instructions`, and return to the next part of this page
+afterwards.
+
+### I allready have R and RStudio installed!
+
+In that case all you need to do is the following:
+
+Make sure you have `tidyverse` and `readxl` installed:
+
+~~~
+install.packages("tidyverse")
+install.packages("readxl")
+~~~
+{: .language-r}
+
+Check that they are installed and work:
+
+~~~
+library(tidyverse)
+library(readxl)
+~~~
+{: .language-r}
+
+Download the example spreadsheet we are working with in this course:
+
+Either using R
+~~~
+download.file("https://raw.githubusercontent.com/KUBDatalab/R-EDA/main/data/flightdata.xlsx"
+              destfile = "flightdata.xlsx", mode = "wb")
+~~~
+{: .language-r}
+
+Or directly from [this link](https://raw.githubusercontent.com/KUBDatalab/R-EDA/main/data/flightdata.xlsx)
+
+Make sure you can find the file again.
+
+## Detailed setup instructions
 
 **R** and **RStudio** are separate downloads and installations. R is the
 underlying statistical computing environment, but using R alone is no
@@ -106,12 +144,6 @@ Due to the size of the dataset used in this workshop, Posit Cloud is not an
 alternative to installing R and Rstudio on you own computer.
 
 
-### For all
 
-**Data used**
-
-https://raw.githubusercontent.com/KUBDatalab/R-EDA/main/data/flightdata.xlsx
-
-You do not need to download the file. We will do that together during the course.
 
 
