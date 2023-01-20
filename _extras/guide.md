@@ -130,7 +130,6 @@ help.
 If learners are having issues with one package, they may have issues with another.
 It's often easier to make sure they have all the needed packages installed at one
 time, rather than deal with these issues over and over. 
-[Here is a list of all necessary packages for these lessons.](https://github.com/datacarpentry/R-ecology-lesson/blob/master/needed_packages.R)
 
 **`|` character on Spanish keyboards:** The Spanish Mac keyboard does not have a `|` key. 
 This character can be created using: 
@@ -143,6 +142,6 @@ This character can be created using:
 
 If you encounter a problem during a workshop, feel free to contact the
 maintainers by email or [open an
-issue](https://github.com/datacarpentry/r-socialsci/issues/new).
+issue](https://github.com/KUBDatalab/R-EDA/issues/new).
 
 For a more in-depth coverage of topics of the workshops, you may want to read "[R for Data Science](http://r4ds.had.co.nz/)" by Hadley Wickham and Garrett Grolemund.

@@ -1,5 +1,5 @@
 ---
-title: "Data Wrangling with dplyr and tidyr"
+title: "Joining data"
 keypoints:
 - FIXME
 objectives:
@@ -27,6 +27,46 @@ delays <- flightdata %>%
   
 ```
 
+## What is the actual name of those airlines?
+
+It is nice to be able to identify the airline that is most on time. 
+But we have carrier codes, not the actual names of them.
+
+How do we get that?
+
+### Reading another sheet in a spreadsheet
+
+Our spreadsheet contains more that one sheet. The second sheet 
+
+```{r eval = T}
+carriers <- read_excel("../data/flightdata.xlsx", 2)
+```
+
+```{r eval = F}
+carriers <- read_excel("data/flightdata.xlsx", 2)
+```
+
+```{r}
+carriers
+```
+
+We now have a second data frame, containing the names of the carriers. And we have
+a data frame containing the average delays
+
+```{r}
+delays
+```
+
+what we would like is something like this:
+```{r echo = F, message = F, warning=F}
+delays %>% left_join(carriers) %>% relocate(name, .after = carrier)
+```
+
+What we want to do is joining the two dataframes, so we enrich the original
+delays dataframe with the name matching the carrier code.
+
+There are 
+
 ## Can we plot the average delays?
 
 Yes we can!
@@ -44,5 +84,13 @@ delays %>%  ggplot(mapping = aes(x = avg_dep_delay, y = avg_arr_delay, color = c
   geom_point()
   
 ```
+
+those points are not that useful
+```{r}
+delays %>%  ggplot(mapping = aes(x = carrier, y = avg_arr_delay, fill = carrier)) +
+  geom_col() +
+  coord_flip()
+```
+
 
 {% include links.md %}

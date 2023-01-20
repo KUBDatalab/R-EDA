@@ -50,7 +50,7 @@ flightdata <- read_excel("data/flightdata.xlsx")
 
 Always begin by taking a look at your data!
 
-```{r, purl=FALSE, eval = F}
+```{r eval = F}
 flightdata %>% 
   head() %>% 
   view()
@@ -116,12 +116,11 @@ data.
 What is the connection between delays of departure vs. arrival for these 
 flights?
 
-```{r}
+```{r warning = F}
 flightdata %>% 
   sample_frac(.005) %>% 
   ggplot(mapping = aes( x = dep_delay, y = arr_delay)) +
   geom_point()
-
 ```
 We pipe the data to `sample_frac` in order to look at 0.5% of the data. 
 The result of that is piped to the `ggplot` function, where we specify that 

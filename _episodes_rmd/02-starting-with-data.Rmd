@@ -23,6 +23,23 @@ knitr_fig_path("02-")
 source("../bin/download_data.R")
 ```
 
+
+Endnu tættere blik på data - boxplots.
+
+histogrammer
+
+facetter
+
+density curves - er der forskelle på de tre lufthavne?
+
+Joins
+
+Er der forskel på forsinkelser som funktion af flyenes alder?
+
+lineær reg.
+
+
+
 ## Looking at parts of the dataset
 
 There are a lot of columns here. If we want to look at only a subset of them
