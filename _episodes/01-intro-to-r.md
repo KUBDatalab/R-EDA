@@ -48,9 +48,33 @@ flightdata <- read_excel("data/flightdata.xlsx")
 Always begin by taking a look at your data!
 
 
+~~~
+flightdata %>% 
+  head() %>% 
+  view()
+~~~
+{: .language-r}
 
-In this case it is the function sample_frac() that takes the input, flightdata, and returns a random fraction of the data. 0.005 in this case. 
-The dataset is pretty large. 
+
+This dataset is pretty big. It is actually so big, that a `view()` of the 
+entire dataset takes about 10 seconds to render. And some of the other
+things we would like to do to it, takes even longer.
+
+Instead of waiting for that, it can be a good idea to work and experiment with
+a smaller part of the dataset, and only use the entirety of the data when we 
+know what we want to do.
+
+One way of doing that would be to use the function `sample_frac` to return a
+random fraction of the dataset:
+
+
+~~~
+flightdata %>% 
+  sample_frac(0.005) %>% 
+  view()
+~~~
+{: .language-r}
+
 
 The summary function returns summary statistics on our data:
 
@@ -104,25 +128,20 @@ summary(flightdata)
                                                  
 ~~~
 {: .output}
+We get an overview of all the data (and the summary function have no problems
+working with even very large datasets). From this we learn a bit about the 
+datatypes in the data, and something about the distribution of the data. 
 
+## Metadata
 
-~~~
-flightdata %>% 
-  filter(dep_delay == 0) %>% 
-  nrow()
-~~~
-{: .language-r}
+Metadata is data about the data. 
+Usually we are interested in the provenance of the data. In this case it is
+data on all flights departing New York City i 2013, from the three commercial
+airports, JFK, LGA and EWR.
+The data was originally extracted from the US Bureau of Transportation Statistics,
+and can be found at https://www.transtats.bts.gov/Homepage.asp
 
-
-
-~~~
-[1] 16514
-~~~
-{: .output}
-
-
-What is actually contained in this dataset, what are the meaning of 
-the column names?
+The columns of the dataset contains the following data:
 
 * year, month, day Date of departure.
 * dep_time, arr_time Actual departure and arrival times (format HHMM or HMM), local tz.
@@ -138,10 +157,13 @@ the column names?
 * time_hour Scheduled date and hour of the flight as a POSIXct date. Along with origin, can be used to join flights data to weather data.
 
 Always remember to save information about what is actually in your 
-data. This is called metadata, data that describes data. 
+data. 
 
 
 ## Let us make a plot
+
+What is the connection between delays of departure vs. arrival for these 
+flights?
 
 
 ~~~
@@ -152,19 +174,63 @@ flightdata %>%
 ~~~
 {: .language-r}
 
-
-
-~~~
-Warning: Removed 50 rows containing missing values (`geom_point()`).
-~~~
-{: .warning}
-
 <img src="../fig/rmd-01-unnamed-chunk-8-1.png" alt="plot of chunk unnamed-chunk-8" width="612" style="display: block; margin: auto;" />
+We pipe the data to `sample_frac` in order to look at 0.5% of the data. 
+The result of that is piped to the `ggplot` function, where we specify that 
+the data should be `mapped` to the plot, by placing the values of the delay of 
+departure on the X-axis, and the delay of arrival on the Y-axis. 
 
-Note that the pipe is not a pipe in plots. Its a +.
+That in itself is not very interesting, so we add something to the plot:
+`+ geom_point()`, specifying that we would like the data plotted as points.
 
-Mapping denotes which values from the data, should be mapped to 
-something in the plot. The "somethings" depends on the type of plot. We are making a scatter plot, using geom_point, because we are plotting points. They have a minimum requirement of x and y.
+This is an example of a case where it can be a good idea to work on a 
+smaller dataset. Plotting the entirety of the data takes about 40 times
+longer than plotting 0.5% of the data.
+
+When we explore data, we often want to look at correlations in the data. 
+If one variable falls, does another fall. 
+
+Making these kinds of plots can help us identify interesting correlations, but
+it is cumbersome to make a lot of them. So that can be automated.
+
+The build-in `plot` function in R will take a dataframe, and plot each 
+individual column against every other column. 
+
+To illustrate we cut down the dataset some more, looking at an even smaller
+subset of the rows, and eliminating some of the columns. To get a better plot
+without a lot of warnings, we also remove missing values from the dataset:
+
+
+~~~
+flightdata %>% 
+  sample_frac(.0001) %>% 
+  select(-c(year, carrier, flight, tailnum, hour, minute, time_hour, origin, dest)) %>% 
+  na.omit() %>% 
+  plot()
+~~~
+{: .language-r}
+
+<img src="../fig/rmd-01-unnamed-chunk-9-1.png" alt="plot of chunk unnamed-chunk-9" width="612" style="display: block; margin: auto;" />
+This gives us a good first indication of how the different variables varies 
+together. 
+
+A better, or perhaps just prettier, way of doing this is to use the library
+`GGally`, which have a fancier version, showing both the distribution of values
+in the different columns, but also the correlation between the variables.
+
+
+
+~~~
+library(GGally)
+flightdata %>% 
+  sample_frac(.0001) %>% 
+  select(-c(year, carrier, flight, tailnum, hour, minute, time_hour, origin, dest)) %>% 
+  na.omit() %>% 
+  ggpairs(progress = F)
+~~~
+{: .language-r}
+
+<img src="../fig/rmd-01-unnamed-chunk-10-1.png" alt="plot of chunk unnamed-chunk-10" width="612" style="display: block; margin: auto;" />
 
 
 
