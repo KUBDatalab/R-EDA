@@ -18,6 +18,7 @@ source("../bin/chunk-options.R")
 knitr_fig_path("03-")
 source("../bin/download_data.R")
 library(dplyr)
+library(tidyverse)
 library(readxl)
 flightdata <- read_excel("../data/flightdata.xlsx", na = "NULL")
 delays <- flightdata %>% 
@@ -65,14 +66,33 @@ delays %>% left_join(carriers) %>% relocate(name, .after = carrier)
 What we want to do is joining the two dataframes, so we enrich the original
 delays dataframe with the name matching the carrier code.
 
-There are 
+Several different types of joins exist. The one we need here is `left_join()`
+
+!(left_join returns all rows in the left dataframe, enriched with data from the rigth)[../fig/left-join.gif]. 
+
+```{r}
+delays %>% 
+  left_join(carriers) 
+```
+
+The relocate function can be used to change the order of the columns:
+
+```{r eval = F}
+delays %>% 
+  left_join(carriers) %>% 
+  relocate(name, .after = carrier)
+```
+
+
+
 
 ## Can we plot the average delays?
 
 Yes we can!
 
 ```{r}
-delays %>%  ggplot(mapping = aes(x = avg_dep_delay, y = avg_arr_delay)) +
+delays %>%  
+  ggplot(mapping = aes(x = avg_dep_delay, y = avg_arr_delay)) +
   geom_point()
   
 ```
