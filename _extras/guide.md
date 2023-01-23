@@ -5,18 +5,14 @@ title: "Instructor Notes"
 
 ## Dataset
 
-The data used for this lesson are in the figshare repository at: <https://figshare.com/articles/SAFI_Survey_Results/6262019>.
+Datasættet er ekstraheret fra biblioteket nycflights13. Det er at foretrække
+at de studerende har downloadet filen på forhånd - den er ret stor.
 
-This lesson uses `SAFI_clean.csv`. The direct download link for this file is:
-<https://ndownloader.figshare.com/files/11492171>.
+Vi har oplevet problemer hvor studerende har brugt posit.cloud - og hvor 
+download og åbning af filen har fået rstudio til at crashe. I det tilfælde
+må det anbefales at den studerende bruger nycflights13 pakken direkte, i stedet
+for at downloade filen.
 
-When time comes in the lesson to use this file, we recommend that the
-instructors place the `download.file()` command in the Etherpad, and that the
-learners copy and paste it in their scripts to download the file directly from
-figshare in their working directory. If the learners haven't created the
-`data/` directory and/or are not in the correct working directory, the
-`download.file()` command will produce an error. Therefore, it is important to use
-the stickies at this point.
 
 ## RStudio and Multiple R Installs
 
@@ -134,7 +130,6 @@ help.
 If learners are having issues with one package, they may have issues with another.
 It's often easier to make sure they have all the needed packages installed at one
 time, rather than deal with these issues over and over. 
-[Here is a list of all necessary packages for these lessons.](https://github.com/datacarpentry/R-ecology-lesson/blob/master/needed_packages.R)
 
 **`|` character on Spanish keyboards:** The Spanish Mac keyboard does not have a `|` key. 
 This character can be created using: 
@@ -147,6 +142,6 @@ This character can be created using:
 
 If you encounter a problem during a workshop, feel free to contact the
 maintainers by email or [open an
-issue](https://github.com/datacarpentry/r-socialsci/issues/new).
+issue](https://github.com/KUBDatalab/R-EDA/issues/new).
 
 For a more in-depth coverage of topics of the workshops, you may want to read "[R for Data Science](http://r4ds.had.co.nz/)" by Hadley Wickham and Garrett Grolemund.
