@@ -5,7 +5,10 @@ exercises: 10
 questions:
 - "FIXME"
 objectives: 
-- "FIXME"
+- "Importing data"
+- "getting an overview of data"
+- "how to find metadata"
+- "using plots to explore our data"
 keypoints:
 - "FIXME"
 source: Rmd
