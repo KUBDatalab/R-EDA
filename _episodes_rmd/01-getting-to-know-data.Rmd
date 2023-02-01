@@ -36,11 +36,8 @@ library(tidyverse)
 library(readxl)
 ```
 
-In order to do useful and interesting things, we need to assign _values_ to
-_objects_. To create an object, we need to give it a name followed by the
-assignment operator `<-`, and the value we want to give it.
-
-The value in this case, is the result of reading an Excel file:
+Let us read in the excel spreadsheet we downloaded in preparation, and saved
+in the data folder of our project:
 
 ```{r echo = F}
 flightdata <- read_excel("../data/flightdata.xlsx")
