@@ -29,46 +29,170 @@ lineær reg.
 source("../bin/chunk-options.R")
 knitr_fig_path("04-")
 source("../bin/download_data.R")
-```
-
-We start by loading the **`tidyverse`** package.
-
-```{r load-package, message=FALSE, purl=FALSE}
 library(tidyverse)
-```
-
-If not still in the workspace, load the data we saved in the previous lesson.
-
-```{r load-data-hidden, purl=FALSE, eval=T, echo=F, results="hide"}
+library(readxl)
 flightdata <- read_excel("../data/flightdata.xlsx")
-```
+carriers <- read_excel("data/flightdata.xlsx", sheet = 2)
 
+```
 
 
 ## Boxplots 
-We can use boxplots to visualize the distribution of number of household members for each wall type:
+
+Boxplots is a common way of visualizing the most common summary statistics:
+
+
 ```{r}
-boxplot(interviews_plotting$no_membrs~interviews_plotting$respondent_wall_type)
+flightdata %>% 
+  group_by(carrier) %>% 
+  summarise(avg_dep_delay = mean(dep_delay, na.rm = T),
+            med_dep_delay = median(dep_delay, na.rm = T),
+            sd_dep_delay = sd(dep_delay, na.rm = T),
+            max_dep_delay = max(dep_delay, na.rm = T),
+            min_dep_delay = min(dep_delay, na.rm  =T),
+            iqr = IQR(dep_delay, na.rm = T)) %>% 
+  arrange(avg_dep_delay) %>% 
+  left_join(carriers) %>% 
+  relocate(name, .after = carrier)
+
 ```
-Two new things happens here. First, we are using a new way of telling the 
-plot function what relationship we want to visualise. 
-The function notation y~x, tells the boxplot function that we want to visualise
-y as a function of x. In this case we want to visualise the number of people, as 
-af function of the wall type. 
-Secondly, we use a boxplot. A boxplots shows the distribution of the values on 
-the y-axis. The median value is indicated by the solid bar.
-The box encapsulates 50% of the observations. Its upper and lower borders 
-represents the interquartile range (IQR). 
-The whiskers on the plot - here only the upper whiskers are shown due to the
-nature of the data, represents the range of the data. The distance from the 
-upper part of the box, to the whisker is 1.5 times the interquartile range.
-The dots that we see for muddaub and sunbricks are outliers. Observations that
-lies so far from the rest of the observations, that we consider them as 
-outliers.
+
+For this visualization, we use air_time, the time the flight takes, instead of
+departure delays. 
+
+```{r}
+flightdata %>% 
+  left_join(carriers) %>% relocate(name, .after = carrier) %>% 
+  ggplot(mapping = aes(x = name, y = air_time)) + 
+  geom_boxplot() + 
+  coord_flip()
+```
+
+The boxplots show the inter quartile range with the white box. The solid black
+line within that, is the median of the air_time. The horizontal lines, called
+whiskers, on each
+side of the white box shows the "minimum" and "maximum" observations, defined
+as the observations that lies no longer from the IQR than 1.5 of the IQR. 
+
+The solid dots at each end of the boxplot, represents outliers, observations that 
+lies outside the whiskers.
 
 Depending on the data, and the nature of the analyses we are going to do,
 outliers are either very interesting, or something that we can ignore.
 
+In this case it might be interesting to investigate which destinations Hawaiian
+Airlines serve. Their fligts are much longer than the flights of the rest of 
+the airlines. 
+
+Let us take a look:
+```{r}
+flightdata %>% 
+  left_join(carriers) %>% relocate(name, .after = carrier) %>% 
+  filter(name == "Hawaiian Airlines Inc.") %>% 
+  count(dest)
+```
+The `count()` function counts the number of times a value exists in a given 
+column, in this case `dest`. 
+
+Conclusion: Hawaiian Airlines only flies to Honolulu. 
+
+Which airlines flies to Honolulu?
+
+```{r}
+flightdata %>% 
+  left_join(carriers) %>% relocate(name, .after = carrier) %>%
+  filter(dest == "HNL") %>% 
+  count(name)
+```
+Here we filter in order to only have flights to Honolulu, and 
+then count the different airlines. Only United Air Lines and Hawaiian 
+Airlines have fligths to Honolulu.
+
+
+## Boxplots are not necessarily a good idea
+
+The boxplots of the air_time indicates that there is more structure in the 
+data than boxplots can reveal. Maybe we should look at the distribution of
+airtime amongst the airlines.
+
+We could plot histograms of the airtime for each airline. Or we could plot
+the smoothed histograms we saw in the correllograms for each airline. Or
+we can use an extra package, `ggridges` to do something fancy.
+
+Begin by installing the package:
+```{r eval = F }
+install.packages("ggridges")
+```
+
+Then load the package, and plot the data:
+```{r}
+library(ggridges)
+
+flightdata %>% 
+  left_join(carriers) %>% relocate(name, .after = carrier) %>% 
+ggplot(aes(x = air_time, y = name, fill = name)) +
+  geom_density_ridges() 
+```
+
+
+## What is the HVAD POKKER KALDER VI DET?
+
+We saw earlier, that there was a correlation between departure delay and 
+arrival delay. Can we use the data to predict how delayed we will be upon
+arrival, when we know that the departure was 47 minutes delayed.
+
+First, the plot:
+```{r}
+flightdata %>%
+  sample_frac(0.005) %>% 
+  ggplot(mapping = aes(x = dep_delay, y = arr_delay)) +
+  geom_point() 
+```
+This looks more or less linear. We can place a linear regression line in the plot
+using the function `geom_smooth(method = "lm")`, where we specify that the function
+should fit a linear line to the data.
+
+```{r}
+flightdata %>%
+  sample_frac(0.005) %>% 
+  ggplot(mapping = aes(x = dep_delay, y = arr_delay)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+So, what is the actual linear model of this data?
+
+A linear model in this case would be a formula on the form:
+
+$arr_delay = a dep_delay + b$
+
+The task is now to find the values of `a` and `b` that best fit the data. This is
+called "fitting a linear model". 
+
+Fitting a linear model to data, is done using the `lm()` function.
+
+We need to specify the actual model that we want to fit, using the special
+formula notation in R:
+
+arr_delay ~ dep_delay
+
+In addition we specify the input data in the function:
+
+```{r}
+model <- lm(arr_delay ~ dep_delay, data = flightdata)
+```
+
+We do this on the entire dataset.
+
+Let us take a look at the result:
+```{r}
+model
+```
+We will not spend time on a complete discussion on p-values, but the way to get
+them is to call the function `summary()` on the model:
+
+```{r}
+summary(model)
+```
 
 
 
