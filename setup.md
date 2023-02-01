@@ -43,6 +43,14 @@ Make sure you can find the file again.
 
 ## Detailed setup instructions
 
+> ## Where to install?
+>
+> Please do NOT install R and RStudio on Onedrive or other clouddrives.
+> R will work but you will not be able to install the extensions to R
+> that you will need in this course!
+>
+{: .caution}
+
 **R** and **RStudio** are separate downloads and installations. R is the
 underlying statistical computing environment, but using R alone is no
 fun. RStudio is a graphical integrated development environment (IDE) that makes
@@ -72,6 +80,7 @@ instructions to install **`tidyverse`**.
   whether a more recent version is available. If so, please download and install
   it. You can [check here](https://cran.r-project.org/bin/windows/base/rw-FAQ.html#How-do-I-UNinstall-R_003f) for
   more information on how to remove old versions from your system if you wish to do so.
+  
 
 #### If you don't have R and RStudio installed
 
@@ -85,6 +94,8 @@ instructions to install **`tidyverse`**.
 * Once it's installed, open RStudio to make sure it works and you don't get any
   error messages.
 
+Now return to the top of this page and finish the instructions under 
+"I allready have R and RStudio installed!"
 
 ### macOS
 
@@ -113,6 +124,8 @@ instructions to install **`tidyverse`**.
 * Once it's installed, open RStudio to make sure it works and you don't get any
   error messages.
 
+Now return to the top of this page and finish the instructions under 
+"I allready have R and RStudio installed!"
 
 ### Linux
 
@@ -129,6 +142,9 @@ instructions to install **`tidyverse`**.
 * Double click the file to install it.
 * Once it's installed, open RStudio to make sure it works and you don't get any
   error messages.
+
+Now return to the top of this page and finish the instructions under 
+"I allready have R and RStudio installed!"
 
 ### Online
 

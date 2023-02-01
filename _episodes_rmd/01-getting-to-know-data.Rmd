@@ -1,11 +1,14 @@
 ---
-title: "Getting started"
+title: "Getting to know the data"
 teaching: 30
 exercises: 10
 questions:
 - "FIXME"
 objectives: 
-- "FIXME"
+- "Importing data"
+- "getting an overview of data"
+- "how to find metadata"
+- "using plots to explore our data"
 keypoints:
 - "FIXME"
 source: Rmd
@@ -113,7 +116,31 @@ data.
 
 ## Let us make a plot
 
-What is the connection between delays of departure vs. arrival for these 
+What is the distribution of departure delays? Are there a lot of flights that
+depart on time, and a few that are very delayed?
+
+A histogram is a great way to get a first impression of a particular variable
+in the dataset, so let us make one of those:
+
+```{r}
+flightdata %>% 
+  ggplot(mapping = aes(x = dep_delay)) +
+    geom_histogram()
+```
+A histogram divides the numeric values of the departure delay into "buckets" 
+with a fixed width. It then counts the number of observations in each 
+bucket, and plot a column matching that count. 
+
+Note the warning! By default `ggplot` divides the observations into 30 buckets.
+30 buckets are almost never the right number, so adjust it by adding eg `bins = 50`
+to `geom_histogram()`
+
+## Let us make another plot!
+
+After looking at the distrubtion of observations in the different variables,
+we might want to explore correlations between them.
+
+What, for example, is the connection between delays of departure vs. arrival for these 
 flights?
 
 ```{r warning = F}
@@ -155,12 +182,21 @@ flightdata %>%
   plot()
 ```
 This gives us a good first indication of how the different variables varies 
-together. 
+together. The name of this type of plot is `correllogram` because it shows
+all the correlations between the selected variables.
 
-A better, or perhaps just prettier, way of doing this is to use the library
+## Bringing distrubtion and correlation together
+
+A better, or perhaps just prettier, way of doing the above is to use the library
 `GGally`, which have a fancier version, showing both the distribution of values
 in the different columns, but also the correlation between the variables.
 
+Begin by installing `GGally`:
+```{r eval = F}
+install.packages("GGally")
+```
+
+Now we can plot:
 
 ```{r}
 library(GGally)
@@ -171,7 +207,10 @@ flightdata %>%
   ggpairs(progress = F)
 ```
 
-
+We need to cut down the number of observations again - the scatterplots would
+be unreadable otherwise. The classical corellogram is enriched with a densityplot
+in the diagonal, basically a very smooth histogram, and the correlation coefficients
+above the diagonal.
 
 
 
