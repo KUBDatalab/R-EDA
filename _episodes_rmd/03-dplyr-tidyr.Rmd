@@ -4,7 +4,6 @@ keypoints:
 - FIXME
 objectives:
 - FIXME
-
 questions:
 - FIXME
 teaching: 20
@@ -21,14 +20,20 @@ library(dplyr)
 library(tidyverse)
 library(readxl)
 flightdata <- read_excel("../data/flightdata.xlsx", na = "NULL")
-delays <- flightdata %>% 
+
+summary_delays <- flightdata %>% 
   group_by(carrier) %>% 
-  summarise(avg_dep_delay = mean(dep_delay, na.rm =T),
-            avg_arr_delay = mean(arr_delay, na.rm=T))
+  summarise(avg_dep_delay = mean(dep_delay, na.rm = T),
+            med_dep_delay = median(dep_delay, na.rm = T),
+            sd_dep_delay = sd(dep_delay, na.rm = T),
+            max_dep_delay = max(dep_delay, na.rm = T),
+            min_dep_delay = min(dep_delay, na.rm  =T),
+            iqr = IQR(dep_delay, na.rm = T)) %>% 
+  arrange(avg_dep_delay)
   
 ```
 
-## What is the actual name of those airlines?
+## What is the actual name of the best airline?
 
 It is nice to be able to identify the airline that is most on time. 
 But we have carrier codes, not the actual names of them.
@@ -37,14 +42,18 @@ How do we get that?
 
 ### Reading another sheet in a spreadsheet
 
-Our spreadsheet contains more that one sheet. The second sheet 
+Our spreadsheet contains more that one sheet. The second sheet contains
+the names and carrier codes of the relevant airlines.
 
-```{r eval = T}
-carriers <- read_excel("../data/flightdata.xlsx", 2)
+We can read sheet number 2 from the Excelfile, by giving `read_excel()` a
+second argument, specifying the sheet we want:
+
+```{r eval = T, echo = F, message=F, warning=F}
+carriers <- read_excel("../data/flightdata.xlsx", sheet = 2)
 ```
 
 ```{r eval = F}
-carriers <- read_excel("data/flightdata.xlsx", 2)
+carriers <- read_excel("data/flightdata.xlsx", sheet = 2)
 ```
 
 ```{r}
@@ -55,61 +64,51 @@ We now have a second data frame, containing the names of the carriers. And we ha
 a data frame containing the average delays
 
 ```{r}
-delays
+summary_delays
 ```
 
 what we would like is something like this:
 ```{r echo = F, message = F, warning=F}
-delays %>% left_join(carriers) %>% relocate(name, .after = carrier)
+summary_delays %>% left_join(carriers) %>% relocate(name, .after = carrier)
 ```
 
 What we want to do is joining the two dataframes, so we enrich the original
-delays dataframe with the name matching the carrier code.
+dataframe containing summary statistics on departure delays, 
+with the name matching the carrier code.
 
 Several different types of joins exist. The one we need here is `left_join()`
 
-!(left_join returns all rows in the left dataframe, enriched with data from the rigth)[../fig/left-join.gif]. 
+![left_join returns all rows in the left dataframe, enriched with data from the rigth](../fig/left-join.gif). 
 
+With a `left_join()` we join the two dataframes. All rows in the left dataframe
+are returned, enriched with the matching values from the columns in the right
+dataframe. Rows in the left dataframe, that does not have a matching row in
+the right dataframe will get NA-values.
+
+Let us do that!
 ```{r}
-delays %>% 
-  left_join(carriers) 
-```
-
-The relocate function can be used to change the order of the columns:
-
-```{r eval = F}
-delays %>% 
+summary_delays %>% 
   left_join(carriers) %>% 
-  relocate(name, .after = carrier)
+  relocate(name, .after = carrier) 
 ```
 
+The relocate function is used to change the order of the columns.
 
 
 
-## Can we plot the average delays?
+
+## Can we plot the average delays with carrier names?
 
 Yes we can!
 
 ```{r}
-delays %>%  
-  ggplot(mapping = aes(x = avg_dep_delay, y = avg_arr_delay)) +
-  geom_point()
-  
-```
-Maybe it would be a good idea to color the points based on carrier. That is,
-we would like to map the carrier to the color of the points:
+summary_delays %>% 
+  left_join(carriers) %>% 
+  relocate(name, .after = carrier) %>% 
 
-```{r}
-delays %>%  ggplot(mapping = aes(x = avg_dep_delay, y = avg_arr_delay, color = carrier)) +
-  geom_point()
+  ggplot(mapping = aes(x = avg_dep_delay, y = name)) +
+  geom_col()
   
-```
-
-those points are not that useful
-```{r}
-delays %>%  ggplot(mapping = aes(x = carrier, y = avg_arr_delay, fill = carrier)) +
-  geom_col() +
-  coord_flip()
 ```
 
 
