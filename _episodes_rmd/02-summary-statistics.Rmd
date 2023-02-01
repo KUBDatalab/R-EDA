@@ -1,16 +1,18 @@
 ---
-title: "Exploring wiht summary statistics"
+title: "Exploring with summary statistics"
 teaching: 30
 exercises: 10
 questions:
-- "FIXME"
+- "How do I get means, medians, IQRs and other summary statistics on my data?"
+- "How do I get summary statistics for different groups in my data?"
 objectives:
-- "FIXME"
+- "Learn the summarise and group_by functions for efficient summary statistics."
 keypoints:
-- "FIXME"
+- "Summary statistics tells us about the distribution of data"
 source: Rmd
 ---
 
+summary statistics
 
 ```{r, include=FALSE}
 source("../bin/chunk-options.R")
@@ -18,21 +20,6 @@ knitr_fig_path("02-")
 library(tidyverse)
 source("../bin/download_data.R")
 ```
-
-
-Endnu tættere blik på data - boxplots.
-
-
-
-facetter
-
-density curves - er der forskelle på de tre lufthavne?
-
-Joins
-
-Er der forskel på forsinkelser som funktion af flyenes alder?
-
-lineær reg.
 
 
 

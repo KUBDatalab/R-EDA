@@ -5,14 +5,17 @@ title: "Getting to know the data"
 teaching: 30
 exercises: 10
 questions:
-- "FIXME"
+- "How do I import data?"
+- "How are the data distributed?"
+- "Are there correlations between variables?"
 objectives: 
 - "Importing data"
 - "getting an overview of data"
 - "how to find metadata"
 - "using plots to explore our data"
 keypoints:
-- "FIXME"
+- "Always start by looking at the data"
+- "Always keep track of the metadata"
 source: Rmd
 ---
 
