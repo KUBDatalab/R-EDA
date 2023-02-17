@@ -18,6 +18,7 @@ source: Rmd
 source("../bin/chunk-options.R")
 knitr_fig_path("02-")
 library(tidyverse)
+library(readxl)
 source("../bin/download_data.R")
 flightdata <- read_excel("../data/flightdata.xlsx")
 ```
