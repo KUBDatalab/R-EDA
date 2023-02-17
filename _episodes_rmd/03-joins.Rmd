@@ -15,7 +15,7 @@ source: Rmd
 ---
 
 
-```{r, include = FALSE}
+```{r SETUP_03, include = FALSE}
 source("../bin/chunk-options.R")
 knitr_fig_path("03-")
 source("../bin/download_data.R")
@@ -97,18 +97,47 @@ summary_delays %>%
 
 The relocate function is used to change the order of the columns.
 
+## There are other join functions
+
+`left_join` is an example of a mutating join. Like the `mutate` function
+left_join introduces new variables, new columns, in our dataframe.
+
+### Mutating joins
+
+The closes cousin of the `left_join` funtion is the `right_join`. 
+
+The left_join returns all rows on the left hand side of the join,
+augmented with values from the dataframe on the right hand side of the
+join, based on matching values.
+
+The right_join function returns all rows on the right hand side of the join. Depending on the flow of our code, we choose the variant that best suit our purpose.
+
+`inner_join` keeps only the rows on the left hand side of the join, that have matching values in the dataframe on the right hand side of the join. Whereas `left_join` and `right_join` keeps all rows, and add NA values where there is no match, `inner_join` only returns rows that have a match. 
+
+`full_join` on the other hand keeps all rows from both dataframes being joined. Any observations that does not have a match in the other dataframe, will have NA values added.
+
+
+### Filtering joins
+
+These joins will filter rows from the left hand dataframe, based on the
+presence or absence of matches in the right hand dataframe.
+
+`semi_join` returns all rows that have a match on the right hand side of the join. But not those that do not have a match.
+
+`anti_join` returns all rows, that *do not* have a match on the rigth hand side of the join.
 
 ## Can we plot the average delays with carrier names?
 
 Yes we can!
 
+We take the summary_delays dataframe, containing the average delays,
+and join it with the data on carrier names. We do not have to specify the column on which we are joining, since there is only one shared column name. We then pipe that result to ggplot, where we specify that we would like the delay to be on the x-axis, and the name of the carrier on the y-axis:
+
 ```{r}
 summary_delays %>% 
   left_join(carriers) %>% 
-  relocate(name, .after = carrier) %>% 
-
   ggplot(mapping = aes(x = avg_dep_delay, y = name)) +
-  geom_col()
+    geom_col()
   
 ```
 

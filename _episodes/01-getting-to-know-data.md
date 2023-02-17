@@ -33,11 +33,8 @@ library(readxl)
 ~~~
 {: .language-r}
 
-In order to do useful and interesting things, we need to assign _values_ to
-_objects_. To create an object, we need to give it a name followed by the
-assignment operator `<-`, and the value we want to give it.
-
-The value in this case, is the result of reading an Excel file:
+Let us read in the excel spreadsheet we downloaded in preparation, and saved
+in the data folder of our project:
 
 
 
@@ -81,6 +78,8 @@ flightdata %>%
 ~~~
 {: .language-r}
 
+After taking a quick look at the data, it is time to get some
+statistical insight.
 
 The summary function returns summary statistics on our data:
 
@@ -196,19 +195,29 @@ Warning: Removed 8255 rows containing non-finite values (`stat_bin()`).
 ~~~
 {: .warning}
 
-<img src="../fig/rmd-01-unnamed-chunk-8-1.png" alt="plot of chunk unnamed-chunk-8" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-01-unnamed-chunk-7-1.png" alt="plot of chunk unnamed-chunk-7" width="612" style="display: block; margin: auto;" />
 A histogram divides the numeric values of the departure delay into "buckets" 
 with a fixed width. It then counts the number of observations in each 
 bucket, and plot a column matching that count. 
 
 Note the warning! By default `ggplot` divides the observations into 30 buckets.
 30 buckets are almost never the right number, so adjust it by adding eg `bins = 50`
-to `geom_histogram()`
+to `geom_histogram()`.
+
+> ## What is the right number of bins?
+>
+> The right number of bins is the number of bins that show what
+> we want to show about the data. 
+> Tips on how to choose a number of bins can be found here:
+> https://kubdatalab.github.io/forklaringer/12-histogrammer/index.html
+>
+{: .callout}
+
+
 
 ## Let us make another plot!
 
-After looking at the distrubtion of observations in the different variables,
-we might want to explore correlations between them.
+After looking at the distrubtion of observations in the different variables, we might want to explore correlations between them.
 
 What, for example, is the connection between delays of departure vs. arrival for these 
 flights?
@@ -222,7 +231,7 @@ flightdata %>%
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-unnamed-chunk-9-1.png" alt="plot of chunk unnamed-chunk-9" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-01-unnamed-chunk-8-1.png" alt="plot of chunk unnamed-chunk-8" width="612" style="display: block; margin: auto;" />
 We pipe the data to `sample_frac` in order to look at 0.5% of the data. 
 The result of that is piped to the `ggplot` function, where we specify that 
 the data should be `mapped` to the plot, by placing the values of the delay of 
@@ -236,7 +245,7 @@ smaller dataset. Plotting the entirety of the data takes about 40 times
 longer than plotting 0.5% of the data.
 
 When we explore data, we often want to look at correlations in the data. 
-If one variable falls, does another fall. 
+If one variable falls, does another fall? Or rise?
 
 Making these kinds of plots can help us identify interesting correlations, but
 it is cumbersome to make a lot of them. So that can be automated.
@@ -244,7 +253,7 @@ it is cumbersome to make a lot of them. So that can be automated.
 The build-in `plot` function in R will take a dataframe, and plot each 
 individual column against every other column. 
 
-To illustrate we cut down the dataset some more, looking at an even smaller
+To illustrate this we cut down the dataset some more, looking at an even smaller
 subset of the rows, and eliminating some of the columns. To get a better plot
 without a lot of warnings, we also remove missing values from the dataset:
 
@@ -258,7 +267,7 @@ flightdata %>%
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-unnamed-chunk-10-1.png" alt="plot of chunk unnamed-chunk-10" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-01-unnamed-chunk-9-1.png" alt="plot of chunk unnamed-chunk-9" width="612" style="display: block; margin: auto;" />
 This gives us a good first indication of how the different variables varies 
 together. The name of this type of plot is `correllogram` because it shows
 all the correlations between the selected variables.
@@ -289,7 +298,7 @@ flightdata %>%
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-unnamed-chunk-12-1.png" alt="plot of chunk unnamed-chunk-12" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-01-unnamed-chunk-11-1.png" alt="plot of chunk unnamed-chunk-11" width="612" style="display: block; margin: auto;" />
 
 We need to cut down the number of observations again - the scatterplots would
 be unreadable otherwise. The classical corellogram is enriched with a densityplot
