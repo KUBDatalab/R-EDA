@@ -12,13 +12,14 @@ keypoints:
 source: Rmd
 ---
 
-summary statistics
 
-```{r, include=FALSE}
+
+```{r SETUP_02, include=FALSE}
 source("../bin/chunk-options.R")
 knitr_fig_path("02-")
 library(tidyverse)
 source("../bin/download_data.R")
+flightdata <- read_excel("../data/flightdata.xlsx")
 ```
 
 
@@ -68,7 +69,8 @@ flightdata %>%
             iqr = IQR(dep_delay, na.rm = T))
 ```
 
-A second step would be to sort the carriers by the average departure delay:
+A second step would be to sort the carriers by the average departure delay. The `arrange()` function does this:
+
 ```{r}
 flightdata %>% 
   group_by(carrier) %>% 
@@ -96,5 +98,6 @@ summary_delays <- flightdata %>%
   arrange(avg_dep_delay)
 ```
 
+Next up - how to figure out the name of the carrier "US".
 
 {% include links.md %}

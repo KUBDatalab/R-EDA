@@ -17,7 +17,7 @@ keypoints:
 source: Rmd
 ---
 
-```{r, include=FALSE}
+```{r SETUP_01, include=FALSE}
 source("../bin/chunk-options.R")
 knitr_fig_path("01-")
 source("../bin/download_data.R")
@@ -77,6 +77,8 @@ flightdata %>%
   view()
 ```
 
+After taking a quick look at the data, it is time to get some
+statistical insight.
 
 The summary function returns summary statistics on our data:
 ```{r}
@@ -133,12 +135,22 @@ bucket, and plot a column matching that count.
 
 Note the warning! By default `ggplot` divides the observations into 30 buckets.
 30 buckets are almost never the right number, so adjust it by adding eg `bins = 50`
-to `geom_histogram()`
+to `geom_histogram()`.
+
+> ## What is the right number of bins?
+>
+> The right number of bins is the number of bins that show what
+> we want to show about the data. 
+> Tips on how to choose a number of bins can be found here:
+> https://kubdatalab.github.io/forklaringer/12-histogrammer/index.html
+>
+{: .callout}
+
+
 
 ## Let us make another plot!
 
-After looking at the distrubtion of observations in the different variables,
-we might want to explore correlations between them.
+After looking at the distrubtion of observations in the different variables, we might want to explore correlations between them.
 
 What, for example, is the connection between delays of departure vs. arrival for these 
 flights?
@@ -162,7 +174,7 @@ smaller dataset. Plotting the entirety of the data takes about 40 times
 longer than plotting 0.5% of the data.
 
 When we explore data, we often want to look at correlations in the data. 
-If one variable falls, does another fall. 
+If one variable falls, does another fall? Or rise?
 
 Making these kinds of plots can help us identify interesting correlations, but
 it is cumbersome to make a lot of them. So that can be automated.
@@ -170,7 +182,7 @@ it is cumbersome to make a lot of them. So that can be automated.
 The build-in `plot` function in R will take a dataframe, and plot each 
 individual column against every other column. 
 
-To illustrate we cut down the dataset some more, looking at an even smaller
+To illustrate this we cut down the dataset some more, looking at an even smaller
 subset of the rows, and eliminating some of the columns. To get a better plot
 without a lot of warnings, we also remove missing values from the dataset:
 
