@@ -29,16 +29,6 @@ EDA stands for Exploratory Data Analysis. It is a process of analyzing and summa
 In R, EDA typically involves using a combination of visual and quantitative methods to explore and summarize the data, such as creating histograms, scatter plots, and summary statistics, which can be done using a variety of R packages such as ggplot2 and dplyr.
 
 
-## R code is great for reproducibility
-
-Reproducibility is when someone else (including your future self) can obtain the
-same results from the same dataset when using the same analysis.
-
-R integrates with other tools to generate manuscripts from your code. If you
-collect more data, or fix a mistake in your dataset, the figures and the
-statistical tests in your manuscript are updated automatically.
-
-
 ## Getting set up
 
 It is good practice to keep a set of related data, analyses, and text

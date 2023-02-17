@@ -1,5 +1,5 @@
 ---
-title: "boxplot og lineær regression (måske)"
+title: "Boxplots and linear regressions"
 teaching: 80
 exercises: 35
 questions:
@@ -8,22 +8,8 @@ objectives:
   - "FIXME"
 keypoints:
   - "FIXME"
-   
 source: Rmd
 ---
-
-Endnu tættere blik på data - boxplots.
-
-
-
-facetter
-
-density curves - er der forskelle på de tre lufthavne?
-
-Er der forskel på forsinkelser som funktion af flyenes alder?
-
-lineær reg.
-
 
 ```{r, include=FALSE}
 source("../bin/chunk-options.R")
@@ -32,32 +18,15 @@ source("../bin/download_data.R")
 library(tidyverse)
 library(readxl)
 flightdata <- read_excel("../data/flightdata.xlsx")
-carriers <- read_excel("data/flightdata.xlsx", sheet = 2)
+carriers <- read_excel("../data/flightdata.xlsx", sheet = 2)
 
 ```
-
 
 ## Boxplots 
 
-Boxplots is a common way of visualizing the most common summary statistics:
+Boxplots are a common way of quickly visualizing some summary statistics for different groups in our data. 
 
-
-```{r}
-flightdata %>% 
-  group_by(carrier) %>% 
-  summarise(avg_dep_delay = mean(dep_delay, na.rm = T),
-            med_dep_delay = median(dep_delay, na.rm = T),
-            sd_dep_delay = sd(dep_delay, na.rm = T),
-            max_dep_delay = max(dep_delay, na.rm = T),
-            min_dep_delay = min(dep_delay, na.rm  =T),
-            iqr = IQR(dep_delay, na.rm = T)) %>% 
-  arrange(avg_dep_delay) %>% 
-  left_join(carriers) %>% 
-  relocate(name, .after = carrier)
-
-```
-
-For this visualization, we use air_time, the time the flight takes, instead of
+For this example, we use air_time, the time the flight takes, instead of
 departure delays. 
 
 ```{r}
@@ -108,6 +77,9 @@ Here we filter in order to only have flights to Honolulu, and
 then count the different airlines. Only United Air Lines and Hawaiian 
 Airlines have fligths to Honolulu.
 
+This also reveals, that the "outliers" for United Air Lines at the 
+extreme right of the plot are not really outliers. They appear because these are the flights to Honolulu. The representation of the data implies that there are a lot of outliers from one single distribution of airtime for United Air Lines. But in reality, the airtime for UA is a bimodal distribution.
+
 
 ## Boxplots are not necessarily a good idea
 
@@ -131,14 +103,14 @@ library(ggridges)
 flightdata %>% 
   left_join(carriers) %>% relocate(name, .after = carrier) %>% 
 ggplot(aes(x = air_time, y = name, fill = name)) +
-  geom_density_ridges() 
+  geom_density_ridges() +
+  theme(legend.position = "none")
 ```
+The number of flights United Air Lines have to Hawaii is too low to actually see here. But we do get a more nuanced view of the distribution of airtime for the individual airlines than we do using boxplots.
 
+## What about a linear regression?
 
-## What is the HVAD POKKER KALDER VI DET?
-
-We saw earlier, that there was a correlation between departure delay and 
-arrival delay. Can we use the data to predict how delayed we will be upon
+We saw earlier, that there was a correlation between departure delay and arrival delay. Can we use the data to predict how delayed we will be upon
 arrival, when we know that the departure was 47 minutes delayed.
 
 First, the plot:
@@ -152,7 +124,7 @@ This looks more or less linear. We can place a linear regression line in the plo
 using the function `geom_smooth(method = "lm")`, where we specify that the function
 should fit a linear line to the data.
 
-```{r}
+```{r, warning = F}
 flightdata %>%
   sample_frac(0.005) %>% 
   ggplot(mapping = aes(x = dep_delay, y = arr_delay)) +
@@ -163,25 +135,25 @@ So, what is the actual linear model of this data?
 
 A linear model in this case would be a formula on the form:
 
-$arr_delay = a dep_delay + b$
+$arr_{delay} = a\cdot dep_{delay} + b$
 
 The task is now to find the values of `a` and `b` that best fit the data. This is
 called "fitting a linear model". 
 
-Fitting a linear model to data, is done using the `lm()` function.
+Fitting a linear model to data is done using the `lm()` function.
 
 We need to specify the actual model that we want to fit, using the special
 formula notation in R:
 
 arr_delay ~ dep_delay
 
-In addition we specify the input data in the function:
+In addition we have to specify the input data in the function:
 
 ```{r}
 model <- lm(arr_delay ~ dep_delay, data = flightdata)
 ```
 
-We do this on the entire dataset.
+We do this on the entire dataset without any problems.
 
 Let us take a look at the result:
 ```{r}
@@ -193,7 +165,35 @@ them is to call the function `summary()` on the model:
 ```{r}
 summary(model)
 ```
+Linear regressions are used to find connections between data. We might be building a model, where we try to figure out what causes delays in this data. Or find the correlation between taking a specific drug and recovering from a disease. 
 
+> ## Correlation does not imply causation!
+>
+> Even if you find a strong correlation between two variables in
+> your data, you have not necessarily found an explanation. 
+> There is a very strong correlation between how much it rains
+> in Hillsborough County in Florida, USA, and how much money
+> The United Kingdom spends on its military. 
+> That does not imply that spending more money on guns in the UK
+> will make it rain more in Florida.
+>
+{: .caution}
+
+The lm() function can handle more than one explanatory variable.
+
+Simple linear combinations of them are specified using a `+` in the 
+formula, like this:
+
+```{r}
+model_2 <- lm(arr_delay ~ dep_delay + air_time, data = flightdata)
+summary(model_2)
+```
+Interactions between explanatory variables are specied using a `*` sign:
+
+```{r}
+model_3 <- lm(arr_delay ~ dep_delay*air_time, data = flightdata)
+summary(model_3)
+```
 
 
 {% include links.md %}
