@@ -11,6 +11,7 @@ objectives:
 keypoints:
   - "FIXME"
 source: Rmd
+math: yes
 ---
 
 
@@ -198,7 +199,7 @@ flightdata %>%
 
 
 ~~~
-Warning: Removed 45 rows containing missing values (`geom_point()`).
+Warning: Removed 62 rows containing missing values (`geom_point()`).
 ~~~
 {: .warning}
 
