@@ -86,25 +86,25 @@ summary_delays
 
 ~~~
 # A tibble: 16 × 7
-   carrier avg_dep_delay med_dep_delay sd_dep_delay max_dep_delay min_de…¹   iqr
-   <chr>           <dbl>         <dbl>        <dbl>         <dbl>    <dbl> <dbl>
- 1 US               3.78          -4           28.1           500      -19     7
- 2 HA               4.90          -4           74.1          1301      -16     6
- 3 AS               5.80          -3           31.4           225      -21    10
- 4 AA               8.59          -3           37.4          1014      -24    10
- 5 DL               9.26          -2           39.7           960      -33    10
- 6 MQ              10.6           -3           39.2          1137      -26    16
- 7 UA              12.1            0           35.7           483      -20    15
- 8 OO              12.6           -6           43.1           154      -14    13
- 9 VX              12.9            0           44.8           653      -20    12
-10 B6              13.0           -1           38.5           502      -43    17
-11 9E              16.7           -2           45.9           747      -24    23
-12 WN              17.7            1           43.3           471      -13    19
-13 FL              18.7            1           52.7           602      -22    21
-14 YV              19.0           -2           49.2           387      -16    30
-15 EV              20.0           -1           46.6           548      -32    30
-16 F9              20.2            0.5         58.4           853      -27    22
-# … with abbreviated variable name ¹​min_dep_delay
+   carrier avg_dep_delay med_dep_delay sd_dep_delay max_dep_delay min_dep_delay
+   <chr>           <dbl>         <dbl>        <dbl>         <dbl>         <dbl>
+ 1 US               3.78          -4           28.1           500           -19
+ 2 HA               4.90          -4           74.1          1301           -16
+ 3 AS               5.80          -3           31.4           225           -21
+ 4 AA               8.59          -3           37.4          1014           -24
+ 5 DL               9.26          -2           39.7           960           -33
+ 6 MQ              10.6           -3           39.2          1137           -26
+ 7 UA              12.1            0           35.7           483           -20
+ 8 OO              12.6           -6           43.1           154           -14
+ 9 VX              12.9            0           44.8           653           -20
+10 B6              13.0           -1           38.5           502           -43
+11 9E              16.7           -2           45.9           747           -24
+12 WN              17.7            1           43.3           471           -13
+13 FL              18.7            1           52.7           602           -22
+14 YV              19.0           -2           49.2           387           -16
+15 EV              20.0           -1           46.6           548           -32
+16 F9              20.2            0.5         58.4           853           -27
+# ℹ 1 more variable: iqr <dbl>
 ~~~
 {: .output}
 
@@ -112,26 +112,25 @@ what we would like is something like this:
 
 ~~~
 # A tibble: 16 × 8
-   carrier name                    avg_d…¹ med_d…² sd_de…³ max_d…⁴ min_d…⁵   iqr
-   <chr>   <chr>                     <dbl>   <dbl>   <dbl>   <dbl>   <dbl> <dbl>
- 1 US      US Airways Inc.            3.78    -4      28.1     500     -19     7
- 2 HA      Hawaiian Airlines Inc.     4.90    -4      74.1    1301     -16     6
- 3 AS      Alaska Airlines Inc.       5.80    -3      31.4     225     -21    10
- 4 AA      American Airlines Inc.     8.59    -3      37.4    1014     -24    10
- 5 DL      Delta Air Lines Inc.       9.26    -2      39.7     960     -33    10
- 6 MQ      Envoy Air                 10.6     -3      39.2    1137     -26    16
- 7 UA      United Air Lines Inc.     12.1      0      35.7     483     -20    15
- 8 OO      SkyWest Airlines Inc.     12.6     -6      43.1     154     -14    13
- 9 VX      Virgin America            12.9      0      44.8     653     -20    12
-10 B6      JetBlue Airways           13.0     -1      38.5     502     -43    17
-11 9E      Endeavor Air Inc.         16.7     -2      45.9     747     -24    23
-12 WN      Southwest Airlines Co.    17.7      1      43.3     471     -13    19
-13 FL      AirTran Airways Corpor…   18.7      1      52.7     602     -22    21
-14 YV      Mesa Airlines Inc.        19.0     -2      49.2     387     -16    30
-15 EV      ExpressJet Airlines In…   20.0     -1      46.6     548     -32    30
-16 F9      Frontier Airlines Inc.    20.2      0.5    58.4     853     -27    22
-# … with abbreviated variable names ¹​avg_dep_delay, ²​med_dep_delay,
-#   ³​sd_dep_delay, ⁴​max_dep_delay, ⁵​min_dep_delay
+   carrier name           avg_dep_delay med_dep_delay sd_dep_delay max_dep_delay
+   <chr>   <chr>                  <dbl>         <dbl>        <dbl>         <dbl>
+ 1 US      US Airways In…          3.78          -4           28.1           500
+ 2 HA      Hawaiian Airl…          4.90          -4           74.1          1301
+ 3 AS      Alaska Airlin…          5.80          -3           31.4           225
+ 4 AA      American Airl…          8.59          -3           37.4          1014
+ 5 DL      Delta Air Lin…          9.26          -2           39.7           960
+ 6 MQ      Envoy Air              10.6           -3           39.2          1137
+ 7 UA      United Air Li…         12.1            0           35.7           483
+ 8 OO      SkyWest Airli…         12.6           -6           43.1           154
+ 9 VX      Virgin America         12.9            0           44.8           653
+10 B6      JetBlue Airwa…         13.0           -1           38.5           502
+11 9E      Endeavor Air …         16.7           -2           45.9           747
+12 WN      Southwest Air…         17.7            1           43.3           471
+13 FL      AirTran Airwa…         18.7            1           52.7           602
+14 YV      Mesa Airlines…         19.0           -2           49.2           387
+15 EV      ExpressJet Ai…         20.0           -1           46.6           548
+16 F9      Frontier Airl…         20.2            0.5         58.4           853
+# ℹ 2 more variables: min_dep_delay <dbl>, iqr <dbl>
 ~~~
 {: .output}
 
@@ -168,26 +167,25 @@ Joining with `by = join_by(carrier)`
 
 ~~~
 # A tibble: 16 × 8
-   carrier name                    avg_d…¹ med_d…² sd_de…³ max_d…⁴ min_d…⁵   iqr
-   <chr>   <chr>                     <dbl>   <dbl>   <dbl>   <dbl>   <dbl> <dbl>
- 1 US      US Airways Inc.            3.78    -4      28.1     500     -19     7
- 2 HA      Hawaiian Airlines Inc.     4.90    -4      74.1    1301     -16     6
- 3 AS      Alaska Airlines Inc.       5.80    -3      31.4     225     -21    10
- 4 AA      American Airlines Inc.     8.59    -3      37.4    1014     -24    10
- 5 DL      Delta Air Lines Inc.       9.26    -2      39.7     960     -33    10
- 6 MQ      Envoy Air                 10.6     -3      39.2    1137     -26    16
- 7 UA      United Air Lines Inc.     12.1      0      35.7     483     -20    15
- 8 OO      SkyWest Airlines Inc.     12.6     -6      43.1     154     -14    13
- 9 VX      Virgin America            12.9      0      44.8     653     -20    12
-10 B6      JetBlue Airways           13.0     -1      38.5     502     -43    17
-11 9E      Endeavor Air Inc.         16.7     -2      45.9     747     -24    23
-12 WN      Southwest Airlines Co.    17.7      1      43.3     471     -13    19
-13 FL      AirTran Airways Corpor…   18.7      1      52.7     602     -22    21
-14 YV      Mesa Airlines Inc.        19.0     -2      49.2     387     -16    30
-15 EV      ExpressJet Airlines In…   20.0     -1      46.6     548     -32    30
-16 F9      Frontier Airlines Inc.    20.2      0.5    58.4     853     -27    22
-# … with abbreviated variable names ¹​avg_dep_delay, ²​med_dep_delay,
-#   ³​sd_dep_delay, ⁴​max_dep_delay, ⁵​min_dep_delay
+   carrier name           avg_dep_delay med_dep_delay sd_dep_delay max_dep_delay
+   <chr>   <chr>                  <dbl>         <dbl>        <dbl>         <dbl>
+ 1 US      US Airways In…          3.78          -4           28.1           500
+ 2 HA      Hawaiian Airl…          4.90          -4           74.1          1301
+ 3 AS      Alaska Airlin…          5.80          -3           31.4           225
+ 4 AA      American Airl…          8.59          -3           37.4          1014
+ 5 DL      Delta Air Lin…          9.26          -2           39.7           960
+ 6 MQ      Envoy Air              10.6           -3           39.2          1137
+ 7 UA      United Air Li…         12.1            0           35.7           483
+ 8 OO      SkyWest Airli…         12.6           -6           43.1           154
+ 9 VX      Virgin America         12.9            0           44.8           653
+10 B6      JetBlue Airwa…         13.0           -1           38.5           502
+11 9E      Endeavor Air …         16.7           -2           45.9           747
+12 WN      Southwest Air…         17.7            1           43.3           471
+13 FL      AirTran Airwa…         18.7            1           52.7           602
+14 YV      Mesa Airlines…         19.0           -2           49.2           387
+15 EV      ExpressJet Ai…         20.0           -1           46.6           548
+16 F9      Frontier Airl…         20.2            0.5         58.4           853
+# ℹ 2 more variables: min_dep_delay <dbl>, iqr <dbl>
 ~~~
 {: .output}
 

@@ -32,7 +32,7 @@ Download the example spreadsheet we are working with in this course:
 
 Either using R
 ~~~
-download.file("https://raw.githubusercontent.com/KUBDatalab/R-EDA/main/data/flightdata.xlsx"
+download.file("https://raw.githubusercontent.com/KUBDatalab/R-EDA/main/data/flightdata.xlsx",
               destfile = "flightdata.xlsx", mode = "wb")
 ~~~
 {: .language-r}
