@@ -260,9 +260,10 @@ without a lot of warnings, we also remove missing values from the dataset:
 
 ~~~
 flightdata %>% 
+  na.omit() %>% 
   sample_frac(.0001) %>% 
   select(-c(year, carrier, flight, tailnum, hour, minute, time_hour, origin, dest)) %>% 
-  na.omit() %>% 
+  
   plot()
 ~~~
 {: .language-r}

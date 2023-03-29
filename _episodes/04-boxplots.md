@@ -199,7 +199,7 @@ flightdata %>%
 
 
 ~~~
-Warning: Removed 66 rows containing missing values (`geom_point()`).
+Warning: Removed 49 rows containing missing values (`geom_point()`).
 ~~~
 {: .warning}
 

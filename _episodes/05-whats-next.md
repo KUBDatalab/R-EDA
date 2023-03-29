@@ -23,24 +23,39 @@ source: Rmd
 
 
 
+# What should I do next?
+
+## Great data
+First of all: If you do not have data you want to work with 
+already. Find some!
+
+[Kaggle](https://www.kaggle.com/datasets) host competitions 
+in machine learning. For the use of those competitions, they
+give access to a lot of interesting datasets to work with.
+With more than 200.000 datasets at time of writing, it can
+be a bit overwhelming, so consider looking at the "[datasets](https://www.kaggle.com/datasets?fileType=csv)" available as CSV-files. 
+
+
+## Great books
+
+Many exists, some are available online, some are even free!
+
+Our favorite is [R for Data Science](https://r4ds.had.co.nz/index.html) by Hadley Wickham and Garrett Grolemund. The [https://r4ds.hadley.nz/](2nd edition) is coming soon. Both editions have a chapter on Exploratory Data Analysis.
 
 ## Great sites
 
-[edx](https://www.edx.org/)
+Most of the larger sites offering online courses in "something-with-data" offers courses that can support your 
+learning in regards to exploratory data analysis:
 
-[datacamp](https://www.datacamp.com/)
-
-[cognitive class](https://cognitiveclass.ai/)
-
+[edx](https://www.edx.org/search?q=r)
 
 
+[codecademy](https://www.codecademy.com/catalog/language/r)
 
 
-## What should I practice on?
 
-[Kaggle](https://www.kaggle.com/)
 
-[Project Euler](https://projecteuler.net/)
+
 
 ## Contact us!
 
