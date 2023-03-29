@@ -29,17 +29,14 @@ Regardless of our curiosity the concepts covered on this site, will be covered.
 >
 > To get started, follow the directions in the "[Setup](setup.html)" tab to
 > download data to your computer and follow any installation instructions.
->
-> #### Prerequisites
->
-> This lesson requires a working copy of **R** and **RStudio**, or access
-> to [Rstudio.cloud](https://rstudio.cloud/).
-> <br>To most effectively use these materials, please make sure to install
-> everything *before* working through this lesson.
-{: .prereq}
 
-> ## For Instructors
-> If you are teaching this lesson in a workshop, please see the
-> [Instructor notes](guide/).
+> ## Prerequisites
+>
+> We are going to assume that you have some familiarity with R and
+> RStudio, equivalent to the topics covered in our introductory course,
+> [R for absolute beginners](https://kubdatalab.github.io/beginning-R/).
+> We are going to use the datamanipulation tools from the tidyverse
+> a lot - so please brush up on the pipe %>% if you have forgotten 
+> about it.
+> 
 {: .prereq}
-
