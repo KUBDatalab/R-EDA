@@ -191,7 +191,6 @@ flightdata %>%
   na.omit() %>% 
   sample_frac(.0001) %>% 
   select(-c(year, carrier, flight, tailnum, hour, minute, time_hour, origin, dest)) %>% 
-  
   plot()
 ```
 This gives us a good first indication of how the different variables varies 
