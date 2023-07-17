@@ -5,11 +5,16 @@ title: "Boxplots and linear regressions"
 teaching: 80
 exercises: 35
 questions:
-  - "FIXME"
+  - "How do I make a Boxplot?"
+  - "How do I make a linear regression?"
 objectives:
-  - "FIXME"
+  - "Learn how to visualise the distribution of your data using boxplots"
+  - "Learn how to investigate correlations between variables using linear regressions"
 keypoints:
-  - "FIXME"
+  - "Boxplots are useful for comparing distributions"
+  - "Boxplots can hide multiple distributions in a variable"
+  - "Density plots can reveal multiple distributions in variables"
+  - "Correlations between variables can be quantified using linear models"
 source: Rmd
 math: yes
 ---
@@ -47,7 +52,10 @@ Warning: Removed 9430 rows containing non-finite values (`stat_boxplot()`).
 ~~~
 {: .warning}
 
-<img src="../fig/rmd-04-unnamed-chunk-2-1.png" alt="plot of chunk unnamed-chunk-2" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-04-unnamed-chunk-2-1.png" alt="plot of chunk unnamed-chunk-2" width="612" />
+<p class="caption">plot of chunk unnamed-chunk-2</p>
+</div>
 
 The boxplots show the inter quartile range with the white box. The solid black
 line within that, is the median of the air_time. The horizontal lines, called
@@ -178,7 +186,10 @@ Warning: Removed 9430 rows containing non-finite values
 ~~~
 {: .warning}
 
-<img src="../fig/rmd-04-unnamed-chunk-6-1.png" alt="plot of chunk unnamed-chunk-6" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-04-unnamed-chunk-6-1.png" alt="plot of chunk unnamed-chunk-6" width="612" />
+<p class="caption">plot of chunk unnamed-chunk-6</p>
+</div>
 The number of flights United Air Lines have to Hawaii is too low to actually see here. But we do get a more nuanced view of the distribution of airtime for the individual airlines than we do using boxplots.
 
 ## What about a linear regression?
@@ -199,11 +210,14 @@ flightdata %>%
 
 
 ~~~
-Warning: Removed 49 rows containing missing values (`geom_point()`).
+Warning: Removed 42 rows containing missing values (`geom_point()`).
 ~~~
 {: .warning}
 
-<img src="../fig/rmd-04-unnamed-chunk-7-1.png" alt="plot of chunk unnamed-chunk-7" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-04-unnamed-chunk-7-1.png" alt="plot of chunk unnamed-chunk-7" width="612" />
+<p class="caption">plot of chunk unnamed-chunk-7</p>
+</div>
 This looks more or less linear. We can place a linear regression line in the plot
 using the function `geom_smooth(method = "lm")`, where we specify that the function
 should fit a linear line to the data.
@@ -225,7 +239,10 @@ flightdata %>%
 ~~~
 {: .output}
 
-<img src="../fig/rmd-04-unnamed-chunk-8-1.png" alt="plot of chunk unnamed-chunk-8" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-04-unnamed-chunk-8-1.png" alt="plot of chunk unnamed-chunk-8" width="612" />
+<p class="caption">plot of chunk unnamed-chunk-8</p>
+</div>
 So, what is the actual linear model of this data?
 
 A linear model in this case would be a formula on the form:

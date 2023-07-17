@@ -3,11 +3,16 @@ title: "Boxplots and linear regressions"
 teaching: 80
 exercises: 35
 questions:
-  - "FIXME"
+  - "How do I make a Boxplot?"
+  - "How do I make a linear regression?"
 objectives:
-  - "FIXME"
+  - "Learn how to visualise the distribution of your data using boxplots"
+  - "Learn how to investigate correlations between variables using linear regressions"
 keypoints:
-  - "FIXME"
+  - "Boxplots are useful for comparing distributions"
+  - "Boxplots can hide multiple distributions in a variable"
+  - "Density plots can reveal multiple distributions in variables"
+  - "Correlations between variables can be quantified using linear models"
 source: Rmd
 math: yes
 ---

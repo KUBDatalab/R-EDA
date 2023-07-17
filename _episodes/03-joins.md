@@ -243,7 +243,10 @@ Joining with `by = join_by(carrier)`
 ~~~
 {: .output}
 
-<img src="../fig/rmd-03-unnamed-chunk-7-1.png" alt="plot of chunk unnamed-chunk-7" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-03-unnamed-chunk-7-1.png" alt="plot of chunk unnamed-chunk-7" width="612" />
+<p class="caption">plot of chunk unnamed-chunk-7</p>
+</div>
 
 
 {% include links.md %}

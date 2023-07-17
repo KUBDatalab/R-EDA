@@ -195,7 +195,10 @@ Warning: Removed 8255 rows containing non-finite values (`stat_bin()`).
 ~~~
 {: .warning}
 
-<img src="../fig/rmd-01-unnamed-chunk-7-1.png" alt="plot of chunk unnamed-chunk-7" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-01-unnamed-chunk-7-1.png" alt="plot of chunk unnamed-chunk-7" width="612" />
+<p class="caption">plot of chunk unnamed-chunk-7</p>
+</div>
 A histogram divides the numeric values of the departure delay into "buckets" 
 with a fixed width. It then counts the number of observations in each 
 bucket, and plot a column matching that count. 
@@ -231,7 +234,10 @@ flightdata %>%
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-unnamed-chunk-8-1.png" alt="plot of chunk unnamed-chunk-8" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-01-unnamed-chunk-8-1.png" alt="plot of chunk unnamed-chunk-8" width="612" />
+<p class="caption">plot of chunk unnamed-chunk-8</p>
+</div>
 We pipe the data to `sample_frac` in order to look at 0.5% of the data. 
 The result of that is piped to the `ggplot` function, where we specify that 
 the data should be `mapped` to the plot, by placing the values of the delay of 
@@ -263,12 +269,14 @@ flightdata %>%
   na.omit() %>% 
   sample_frac(.0001) %>% 
   select(-c(year, carrier, flight, tailnum, hour, minute, time_hour, origin, dest)) %>% 
-  
   plot()
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-unnamed-chunk-9-1.png" alt="plot of chunk unnamed-chunk-9" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-01-unnamed-chunk-9-1.png" alt="plot of chunk unnamed-chunk-9" width="612" />
+<p class="caption">plot of chunk unnamed-chunk-9</p>
+</div>
 This gives us a good first indication of how the different variables varies 
 together. The name of this type of plot is `correllogram` because it shows
 all the correlations between the selected variables.
@@ -299,7 +307,10 @@ flightdata %>%
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-unnamed-chunk-11-1.png" alt="plot of chunk unnamed-chunk-11" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-01-unnamed-chunk-11-1.png" alt="plot of chunk unnamed-chunk-11" width="612" />
+<p class="caption">plot of chunk unnamed-chunk-11</p>
+</div>
 
 We need to cut down the number of observations again - the scatterplots would
 be unreadable otherwise. The classical corellogram is enriched with a densityplot
