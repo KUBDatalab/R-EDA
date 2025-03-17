@@ -617,12 +617,7 @@ easier. We also load a package to help us read Excel files:</p>
 </div>
 <p>Let us read in the excel spreadsheet we downloaded in preparation,
 and saved in the data folder of our project:</p>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error: `path` does not exist: '../data/flightdata.xlsx'</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb3">
+<div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -632,7 +627,7 @@ and saved in the data folder of our project:</p>
 <h1 id="taking-a-look-at-the-data">Taking a look at the data<a class="anchor" aria-label="anchor" href="#taking-a-look-at-the-data"></a>
 </h1>
 <p>Always begin by taking a look at your data!</p>
-<div class="codewrapper sourceCode" id="cb4">
+<div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -649,7 +644,7 @@ experiment with a smaller part of the dataset, and only use the entirety
 of the data when we know what we want to do.</p>
 <p>One way of doing that would be to use the function
 <code>sample_frac</code> to return a random fraction of the dataset:</p>
-<div class="codewrapper sourceCode" id="cb5">
+<div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -660,16 +655,55 @@ of the data when we know what we want to do.</p>
 <p>After taking a quick look at the data, it is time to get some
 statistical insight.</p>
 <p>The summary function returns summary statistics on our data:</p>
-<div class="codewrapper sourceCode" id="cb6">
+<div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">summary</span><span class="op">(</span><span class="va">flightdata</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="error" tabindex="0"><code>Error: object 'flightdata' not found</code></pre>
+<pre class="output" tabindex="0"><code>      year          month             day           dep_time    sched_dep_time
+ Min.   :2013   Min.   : 1.000   Min.   : 1.00   Min.   :   1   Min.   : 106
+ 1st Qu.:2013   1st Qu.: 4.000   1st Qu.: 8.00   1st Qu.: 907   1st Qu.: 906
+ Median :2013   Median : 7.000   Median :16.00   Median :1401   Median :1359
+ Mean   :2013   Mean   : 6.549   Mean   :15.71   Mean   :1349   Mean   :1344
+ 3rd Qu.:2013   3rd Qu.:10.000   3rd Qu.:23.00   3rd Qu.:1744   3rd Qu.:1729
+ Max.   :2013   Max.   :12.000   Max.   :31.00   Max.   :2400   Max.   :2359
+                                                 NA's   :8255
+   dep_delay          arr_time    sched_arr_time   arr_delay
+ Min.   : -43.00   Min.   :   1   Min.   :   1   Min.   : -86.000
+ 1st Qu.:  -5.00   1st Qu.:1104   1st Qu.:1124   1st Qu.: -17.000
+ Median :  -2.00   Median :1535   Median :1556   Median :  -5.000
+ Mean   :  12.64   Mean   :1502   Mean   :1536   Mean   :   6.895
+ 3rd Qu.:  11.00   3rd Qu.:1940   3rd Qu.:1945   3rd Qu.:  14.000
+ Max.   :1301.00   Max.   :2400   Max.   :2359   Max.   :1272.000
+ NA's   :8255      NA's   :8713                  NA's   :9430
+   carrier              flight       tailnum             origin
+ Length:336776      Min.   :   1   Length:336776      Length:336776
+ Class :character   1st Qu.: 553   Class :character   Class :character
+ Mode  :character   Median :1496   Mode  :character   Mode  :character
+                    Mean   :1972
+                    3rd Qu.:3465
+                    Max.   :8500
+
+     dest              air_time        distance         hour
+ Length:336776      Min.   : 20.0   Min.   :  17   Min.   : 1.00
+ Class :character   1st Qu.: 82.0   1st Qu.: 502   1st Qu.: 9.00
+ Mode  :character   Median :129.0   Median : 872   Median :13.00
+                    Mean   :150.7   Mean   :1040   Mean   :13.18
+                    3rd Qu.:192.0   3rd Qu.:1389   3rd Qu.:17.00
+                    Max.   :695.0   Max.   :4983   Max.   :23.00
+                    NA's   :9430
+     minute        time_hour
+ Min.   : 0.00   Min.   :2013-01-01 10:00:00.00
+ 1st Qu.: 8.00   1st Qu.:2013-04-04 17:00:00.00
+ Median :29.00   Median :2013-07-03 14:00:00.00
+ Mean   :26.23   Mean   :2013-07-03 09:22:54.64
+ 3rd Qu.:44.00   3rd Qu.:2013-10-01 11:00:00.00
+ Max.   :59.00   Max.   :2014-01-01 04:00:00.00
+                                                 </code></pre>
 </div>
 <p>We get an overview of all the data (and the summary function have no
 problems working with even very large datasets). From this we learn a
@@ -716,7 +750,7 @@ data.</p>
 flights that depart on time, and a few that are very delayed?</p>
 <p>A histogram is a great way to get a first impression of a particular
 variable in the dataset, so let us make one of those:</p>
-<div class="codewrapper sourceCode" id="cb8">
+<div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -725,11 +759,18 @@ variable in the dataset, so let us make one of those:</p>
 <span>    <span class="fu">geom_histogram</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="error" tabindex="0"><code>Error: object 'flightdata' not found</code></pre>
+<pre class="output" tabindex="0"><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 </div>
-<p>A histogram divides the numeric values of the departure delay into
+<div class="codewrapper">
+<h3 class="code-label">WARNING<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="warning" tabindex="0"><code>Warning: Removed 8255 rows containing non-finite outside the scale range
+(`stat_bin()`).</code></pre>
+</div>
+<p><img src="../fig/getting-to-know-data-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" class="figure">
+A histogram divides the numeric values of the departure delay into
 “buckets” with a fixed width. It then counts the number of observations
 in each bucket, and plot a column matching that count.</p>
 <p>Note the warning! By default <code>ggplot</code> divides the
@@ -765,13 +806,9 @@ vs. arrival for these flights?</p>
 <span>  <span class="fu">ggplot</span><span class="op">(</span>mapping <span class="op">=</span> <span class="fu">aes</span><span class="op">(</span> x <span class="op">=</span> <span class="va">dep_delay</span>, y <span class="op">=</span> <span class="va">arr_delay</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error: object 'flightdata' not found</code></pre>
-</div>
-<p>We pipe the data to <code>sample_frac</code> in order to look at 0.5%
-of the data. The result of that is piped to the <code>ggplot</code>
+<p><img src="../fig/getting-to-know-data-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" class="figure">
+We pipe the data to <code>sample_frac</code> in order to look at 0.5% of
+the data. The result of that is piped to the <code>ggplot</code>
 function, where we specify that the data should be <code>mapped</code>
 to the plot, by placing the values of the delay of departure on the
 X-axis, and the delay of arrival on the Y-axis.</p>
@@ -792,7 +829,7 @@ and plot each individual column against every other column.</p>
 even smaller subset of the rows, and eliminating some of the columns. To
 get a better plot without a lot of warnings, we also remove missing
 values from the dataset:</p>
-<div class="codewrapper sourceCode" id="cb12">
+<div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -802,12 +839,8 @@ values from the dataset:</p>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="op">-</span><span class="fu">c</span><span class="op">(</span><span class="va">year</span>, <span class="va">carrier</span>, <span class="va">flight</span>, <span class="va">tailnum</span>, <span class="va">hour</span>, <span class="va">minute</span>, <span class="va">time_hour</span>, <span class="va">origin</span>, <span class="va">dest</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">plot</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error: object 'flightdata' not found</code></pre>
-</div>
-<p>This gives us a good first indication of how the different variables
+<p><img src="../fig/getting-to-know-data-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" class="figure">
+This gives us a good first indication of how the different variables
 varies together. The name of this type of plot is
 <code>correllogram</code> because it shows all the correlations between
 the selected variables.</p>
@@ -820,14 +853,14 @@ the library <code>GGally</code>, which have a fancier version, showing
 both the distribution of values in the different columns, but also the
 correlation between the variables.</p>
 <p>Begin by installing <code>GGally</code>:</p>
-<div class="codewrapper sourceCode" id="cb14">
+<div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">install.packages</span><span class="op">(</span><span class="st">"GGally"</span><span class="op">)</span></span></code></pre>
 </div>
 <p>Now we can plot:</p>
-<div class="codewrapper sourceCode" id="cb15">
+<div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -838,12 +871,7 @@ correlation between the variables.</p>
 <span>  <span class="fu">na.omit</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">ggpairs</span><span class="op">(</span>progress <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span></code></pre>
 </div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error: object 'flightdata' not found</code></pre>
-</div>
-<p>We need to cut down the number of observations again - the
+<figure><img src="../fig/getting-to-know-data-rendered-unnamed-chunk-11-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>We need to cut down the number of observations again - the
 scatterplots would be unreadable otherwise. The classical corellogram is
 enriched with a densityplot in the diagonal, basically a very smooth
 histogram, and the correlation coefficients above the diagonal.</p>
@@ -1543,7 +1571,7 @@ delayed.</p>
 <div class="codewrapper">
 <h3 class="code-label">WARNING<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="warning" tabindex="0"><code>Warning: Removed 42 rows containing missing values or values outside the scale range
+<pre class="warning" tabindex="0"><code>Warning: Removed 39 rows containing missing values or values outside the scale range
 (`geom_point()`).</code></pre>
 </div>
 <p><img src="../fig/boxplots-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" class="figure">

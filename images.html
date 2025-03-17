@@ -372,7 +372,30 @@
 <p aria-hidden="true">Image 1 of 1: ‘Example of a working directory structure’</p>
 <figure><img src="fig/rstudio_project_files.jpeg" alt="Example of a working directory structure" class="figure mx-auto d-block"><div class="figcaption">Example of a working directory structure</div>
 </figure><hr></section><section id="getting-to-know-data"><h2 class="section-heading"><a href="getting-to-know-data.html">Getting to know the dataTaking a look at the data<a class="anchor" aria-label="anchor" href="#taking-a-look-at-the-data"></a></a></h2>
-<hr class="half-width"></section><section id="summary-statistics"><h2 class="section-heading"><a href="summary-statistics.html">Exploring with summary statistics</a></h2>
+<hr class="half-width">
+<h3 id="getting-to-know-data-figure-1">Figure 1</h3>
+<p><img src="fig/getting-to-know-data-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" class="figure">
+A histogram divides the numeric values of the departure delay into
+“buckets” with a fixed width. It then counts the number of observations
+in each bucket, and plot a column matching that count.</p>
+<hr>
+<h3 id="getting-to-know-data-figure-2">Figure 2</h3>
+<p><img src="fig/getting-to-know-data-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" class="figure">
+We pipe the data to <code>sample_frac</code> in order to look at 0.5% of
+the data. The result of that is piped to the <code>ggplot</code>
+function, where we specify that the data should be <code>mapped</code>
+to the plot, by placing the values of the delay of departure on the
+X-axis, and the delay of arrival on the Y-axis.</p>
+<hr>
+<h3 id="getting-to-know-data-figure-3">Figure 3</h3>
+<p><img src="fig/getting-to-know-data-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" class="figure">
+This gives us a good first indication of how the different variables
+varies together. The name of this type of plot is
+<code>correllogram</code> because it shows all the correlations between
+the selected variables.</p>
+<hr>
+<h3 id="getting-to-know-data-figure-4">Figure 4</h3>
+<figure><img src="fig/getting-to-know-data-rendered-unnamed-chunk-11-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><hr></section><section id="summary-statistics"><h2 class="section-heading"><a href="summary-statistics.html">Exploring with summary statistics</a></h2>
 <hr class="half-width"></section><section id="joins"><h2 class="section-heading"><a href="joins.html">Joining data</a></h2>
 <hr class="half-width">
 <h3 id="joins-figure-1">Figure 1</h3>
