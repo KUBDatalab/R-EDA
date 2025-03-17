@@ -35,9 +35,6 @@ We can read sheet number 2 from the Excelfile, by giving `read_excel()` a
 second argument, specifying the sheet we want:
 
 
-``` error
-Error: `path` does not exist: '../data/flightdata.xlsx'
-```
 
 
 ``` r
@@ -49,8 +46,26 @@ carriers <- read_excel("data/flightdata.xlsx", sheet = 2)
 carriers
 ```
 
-``` error
-Error: object 'carriers' not found
+``` output
+# A tibble: 16 × 2
+   carrier name                       
+   <chr>   <chr>                      
+ 1 9E      Endeavor Air Inc.          
+ 2 AA      American Airlines Inc.     
+ 3 AS      Alaska Airlines Inc.       
+ 4 B6      JetBlue Airways            
+ 5 DL      Delta Air Lines Inc.       
+ 6 EV      ExpressJet Airlines Inc.   
+ 7 F9      Frontier Airlines Inc.     
+ 8 FL      AirTran Airways Corporation
+ 9 HA      Hawaiian Airlines Inc.     
+10 MQ      Envoy Air                  
+11 OO      SkyWest Airlines Inc.      
+12 UA      United Air Lines Inc.      
+13 US      US Airways Inc.            
+14 VX      Virgin America             
+15 WN      Southwest Airlines Co.     
+16 YV      Mesa Airlines Inc.         
 ```
 
 We now have a second data frame, containing the names of the carriers. And we have
@@ -86,8 +101,27 @@ summary_delays
 
 what we would like is something like this:
 
-``` error
-Error: object 'carriers' not found
+``` output
+# A tibble: 16 × 8
+   carrier name           avg_dep_delay med_dep_delay sd_dep_delay max_dep_delay
+   <chr>   <chr>                  <dbl>         <dbl>        <dbl>         <dbl>
+ 1 US      US Airways In…          3.78          -4           28.1           500
+ 2 HA      Hawaiian Airl…          4.90          -4           74.1          1301
+ 3 AS      Alaska Airlin…          5.80          -3           31.4           225
+ 4 AA      American Airl…          8.59          -3           37.4          1014
+ 5 DL      Delta Air Lin…          9.26          -2           39.7           960
+ 6 MQ      Envoy Air              10.6           -3           39.2          1137
+ 7 UA      United Air Li…         12.1            0           35.7           483
+ 8 OO      SkyWest Airli…         12.6           -6           43.1           154
+ 9 VX      Virgin America         12.9            0           44.8           653
+10 B6      JetBlue Airwa…         13.0           -1           38.5           502
+11 9E      Endeavor Air …         16.7           -2           45.9           747
+12 WN      Southwest Air…         17.7            1           43.3           471
+13 FL      AirTran Airwa…         18.7            1           52.7           602
+14 YV      Mesa Airlines…         19.0           -2           49.2           387
+15 EV      ExpressJet Ai…         20.0           -1           46.6           548
+16 F9      Frontier Airl…         20.2            0.5         58.4           853
+# ℹ 2 more variables: min_dep_delay <dbl>, iqr <dbl>
 ```
 
 What we want to do is joining the two dataframes, so we enrich the original
@@ -111,8 +145,31 @@ summary_delays %>%
   relocate(name, .after = carrier) 
 ```
 
-``` error
-Error: object 'carriers' not found
+``` output
+Joining with `by = join_by(carrier)`
+```
+
+``` output
+# A tibble: 16 × 8
+   carrier name           avg_dep_delay med_dep_delay sd_dep_delay max_dep_delay
+   <chr>   <chr>                  <dbl>         <dbl>        <dbl>         <dbl>
+ 1 US      US Airways In…          3.78          -4           28.1           500
+ 2 HA      Hawaiian Airl…          4.90          -4           74.1          1301
+ 3 AS      Alaska Airlin…          5.80          -3           31.4           225
+ 4 AA      American Airl…          8.59          -3           37.4          1014
+ 5 DL      Delta Air Lin…          9.26          -2           39.7           960
+ 6 MQ      Envoy Air              10.6           -3           39.2          1137
+ 7 UA      United Air Li…         12.1            0           35.7           483
+ 8 OO      SkyWest Airli…         12.6           -6           43.1           154
+ 9 VX      Virgin America         12.9            0           44.8           653
+10 B6      JetBlue Airwa…         13.0           -1           38.5           502
+11 9E      Endeavor Air …         16.7           -2           45.9           747
+12 WN      Southwest Air…         17.7            1           43.3           471
+13 FL      AirTran Airwa…         18.7            1           52.7           602
+14 YV      Mesa Airlines…         19.0           -2           49.2           387
+15 EV      ExpressJet Ai…         20.0           -1           46.6           548
+16 F9      Frontier Airl…         20.2            0.5         58.4           853
+# ℹ 2 more variables: min_dep_delay <dbl>, iqr <dbl>
 ```
 
 The relocate function is used to change the order of the columns.
@@ -161,9 +218,11 @@ summary_delays %>%
     geom_col()
 ```
 
-``` error
-Error: object 'carriers' not found
+``` output
+Joining with `by = join_by(carrier)`
 ```
+
+<img src="fig/joins-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
 
 
 ::::keypoints
