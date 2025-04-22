@@ -116,14 +116,14 @@ summary(flightdata)
                     3rd Qu.:192.0   3rd Qu.:1389   3rd Qu.:17.00  
                     Max.   :695.0   Max.   :4983   Max.   :23.00  
                     NA's   :9430                                  
-     minute        time_hour                     
- Min.   : 0.00   Min.   :2013-01-01 10:00:00.00  
- 1st Qu.: 8.00   1st Qu.:2013-04-04 17:00:00.00  
- Median :29.00   Median :2013-07-03 14:00:00.00  
- Mean   :26.23   Mean   :2013-07-03 09:22:54.64  
- 3rd Qu.:44.00   3rd Qu.:2013-10-01 11:00:00.00  
- Max.   :59.00   Max.   :2014-01-01 04:00:00.00  
-                                                 
+     minute        time_hour                  
+ Min.   : 0.00   Min.   :2013-01-01 10:00:00  
+ 1st Qu.: 8.00   1st Qu.:2013-04-04 17:00:00  
+ Median :29.00   Median :2013-07-03 14:00:00  
+ Mean   :26.23   Mean   :2013-07-03 09:22:54  
+ 3rd Qu.:44.00   3rd Qu.:2013-10-01 11:00:00  
+ Max.   :59.00   Max.   :2014-01-01 04:00:00  
+                                              
 ```
 We get an overview of all the data (and the summary function have no problems
 working with even very large datasets). From this we learn a bit about the 
