@@ -222,7 +222,7 @@ summary_delays |>
 Joining with `by = join_by(carrier)`
 ```
 
-<img src="fig/joins-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
+<img src="fig/joins-rendered-unnamed-chunk-7-1.png" alt="" style="display: block; margin: auto;" />
 
 
 ::::keypoints

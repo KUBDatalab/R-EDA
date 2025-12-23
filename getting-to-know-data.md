@@ -181,7 +181,7 @@ Warning: Removed 8255 rows containing non-finite outside the scale range
 (`stat_bin()`).
 ```
 
-<img src="fig/getting-to-know-data-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
+<img src="fig/getting-to-know-data-rendered-unnamed-chunk-7-1.png" alt="" style="display: block; margin: auto;" />
 A histogram divides the numeric values of the departure delay into "buckets" 
 with a fixed width. It then counts the number of observations in each 
 bucket, and plot a column matching that count. 
@@ -217,7 +217,7 @@ flightdata |>
   geom_point()
 ```
 
-<img src="fig/getting-to-know-data-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
+<img src="fig/getting-to-know-data-rendered-unnamed-chunk-8-1.png" alt="" style="display: block; margin: auto;" />
 We pipe the data to `sample_frac` in order to look at 0.5% of the data. 
 The result of that is piped to the `ggplot` function, where we specify that 
 the data should be `mapped` to the plot, by placing the values of the delay of 
@@ -252,7 +252,7 @@ flightdata |>
   plot()
 ```
 
-<img src="fig/getting-to-know-data-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" />
+<img src="fig/getting-to-know-data-rendered-unnamed-chunk-9-1.png" alt="" style="display: block; margin: auto;" />
 This gives us a good first indication of how the different variables varies 
 together. The name of this type of plot is `correllogram` because it shows
 all the correlations between the selected variables.
@@ -281,7 +281,7 @@ flightdata |>
   ggpairs(progress = F)
 ```
 
-<img src="fig/getting-to-know-data-rendered-unnamed-chunk-11-1.png" style="display: block; margin: auto;" />
+<img src="fig/getting-to-know-data-rendered-unnamed-chunk-11-1.png" alt="" style="display: block; margin: auto;" />
 
 We need to cut down the number of observations again - the scatterplots would
 be unreadable otherwise. The classical corellogram is enriched with a densityplot

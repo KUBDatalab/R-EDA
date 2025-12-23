@@ -44,7 +44,7 @@ Warning: Removed 9430 rows containing non-finite outside the scale range
 (`stat_boxplot()`).
 ```
 
-<img src="fig/boxplots-rendered-unnamed-chunk-2-1.png" style="display: block; margin: auto;" />
+<img src="fig/boxplots-rendered-unnamed-chunk-2-1.png" alt="" style="display: block; margin: auto;" />
 
 The boxplots show the inter quartile range with the white box. The solid black
 line within that, is the median of the air_time. The horizontal lines, called
@@ -156,7 +156,7 @@ Warning: Removed 9430 rows containing non-finite outside the scale range
 (`stat_density_ridges()`).
 ```
 
-<img src="fig/boxplots-rendered-unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
+<img src="fig/boxplots-rendered-unnamed-chunk-6-1.png" alt="" style="display: block; margin: auto;" />
 The number of flights United Air Lines have to Hawaii is too low to actually see here. But we do get a more nuanced view of the distribution of airtime for the individual airlines than we do using boxplots.
 
 ## What about a linear regression?
@@ -174,11 +174,11 @@ flightdata |>
 ```
 
 ``` warning
-Warning: Removed 45 rows containing missing values or values outside the scale range
+Warning: Removed 48 rows containing missing values or values outside the scale range
 (`geom_point()`).
 ```
 
-<img src="fig/boxplots-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
+<img src="fig/boxplots-rendered-unnamed-chunk-7-1.png" alt="" style="display: block; margin: auto;" />
 This looks more or less linear. We can place a linear regression line in the plot
 using the function `geom_smooth(method = "lm")`, where we specify that the function
 should fit a linear line to the data.
@@ -196,7 +196,7 @@ flightdata |>
 `geom_smooth()` using formula = 'y ~ x'
 ```
 
-<img src="fig/boxplots-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
+<img src="fig/boxplots-rendered-unnamed-chunk-8-1.png" alt="" style="display: block; margin: auto;" />
 So, what is the actual linear model of this data?
 
 A linear model in this case would be a formula on the form:
