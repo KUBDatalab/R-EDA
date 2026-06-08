@@ -310,6 +310,7 @@ collated into the workbook. It is supplemented with relevant IATA codes
 from <a href="https://datahub.io/core/airport-codes" class="external-link">datahub.io</a>.</p>
 <p>The <code>nycflights13</code> data is originally extracted from <a href="https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=236" class="external-link">Bureau
 of Transportation Statistics</a>.</p>
+<p>FAA Aircraft registry, <a href="https://www.faa.gov/licenses_certificates/aircraft_certification/aircraft_registry/releasable_aircraft_download/" class="external-link uri">https://www.faa.gov/licenses_certificates/aircraft_certification/aircraft_registry/releasable_aircraft_download/</a></p>
 <p>The workbook consist of four spreadsheets:</p>
 <section><h2 class="section-heading" id="flights">Flights<a class="anchor" aria-label="anchor" href="#flights"></a></h2>
 <hr class="half-width"><table class="table"><colgroup><col width="17%"><col width="71%"><col width="11%"></colgroup><thead><tr><th>Variable</th>
@@ -353,25 +354,28 @@ of Transportation Statistics</a>.</p>
 <td>Plane tail number. Matches the tailnum variable in “planes”</td>
 <td></td>
 </tr><tr><td>origin</td>
-<td></td>
+<td>iata code for origin airport. Mathces the iata_code variable in
+“airports”</td>
 <td></td>
 </tr><tr><td>dest</td>
-<td></td>
+<td>iata code for destination airport. Mathces the iata_code variable in
+“airports”</td>
 <td></td>
 </tr><tr><td>air_time</td>
-<td></td>
-<td></td>
+<td>Amount of time spent in the air</td>
+<td>minutes</td>
 </tr><tr><td>distance</td>
-<td></td>
-<td></td>
+<td>distance between airports</td>
+<td>miles</td>
 </tr><tr><td>hour</td>
-<td></td>
+<td>Time of scheduled departure - the hour part</td>
 <td></td>
 </tr><tr><td>minute</td>
-<td></td>
+<td>Time of scheduled departure - the minutes part</td>
 <td></td>
 </tr><tr><td>time_hour</td>
-<td></td>
+<td>Schedules date and hour of the flight as POSIXct date. Can join
+flights data to “weather” data along with the origin variable</td>
 <td></td>
 </tr></tbody></table></section><section><h2 class="section-heading" id="airlines">airlines<a class="anchor" aria-label="anchor" href="#airlines"></a></h2>
 <hr class="half-width"><table class="table"><colgroup><col width="19%"><col width="80%"></colgroup><thead><tr><th>Variable</th>
@@ -386,34 +390,85 @@ in “flights”</td>
 <th>Description/Code</th>
 <th>Unit</th>
 </tr></thead><tbody><tr><td>tailnum</td>
+<td>Tail number. Matches the tailnum variable in “flights”</td>
+<td></td>
+</tr><tr><td>year</td>
+<td>Year the plane was manufactured</td>
+<td></td>
+</tr><tr><td>type</td>
+<td>Type of plane. Either fixed wing with multiple or single engine, or
+rotorcract (helicopter)</td>
+<td></td>
+</tr><tr><td>manufacturer</td>
+<td>Manufacturer of the plane</td>
+<td></td>
+</tr><tr><td>model</td>
+<td>Model of the plane</td>
+<td></td>
+</tr><tr><td>engines</td>
+<td>Number of engines</td>
+<td></td>
+</tr><tr><td>seats</td>
+<td>Number of passenger seats</td>
+<td></td>
+</tr><tr><td>speed</td>
+<td>Average cruising speed</td>
+<td>miles/h</td>
+</tr><tr><td>engine</td>
+<td>type of engine</td>
+<td></td>
+</tr></tbody></table></section><section><h2 class="section-heading" id="weather">Weather<a class="anchor" aria-label="anchor" href="#weather"></a></h2>
+<hr class="half-width"><table class="table"><colgroup><col width="17%"><col width="71%"><col width="11%"></colgroup><thead><tr><th>Variable</th>
+<th>Description/Code</th>
+<th>Unit</th>
+</tr></thead><tbody><tr><td>origin</td>
 <td></td>
 <td></td>
 </tr><tr><td>year</td>
 <td></td>
 <td></td>
-</tr><tr><td>type</td>
+</tr><tr><td>month</td>
 <td></td>
 <td></td>
-</tr><tr><td>manufacturer</td>
+</tr><tr><td>day</td>
 <td></td>
 <td></td>
-</tr><tr><td>model</td>
+</tr><tr><td>hour</td>
 <td></td>
 <td></td>
-</tr><tr><td>engines</td>
+</tr><tr><td>temp</td>
 <td></td>
 <td></td>
-</tr><tr><td>seats</td>
+</tr><tr><td>dewp</td>
 <td></td>
 <td></td>
-</tr><tr><td>speed</td>
+</tr><tr><td>humid</td>
 <td></td>
 <td></td>
-</tr><tr><td>engine</td>
+</tr><tr><td>wind_dir</td>
+<td></td>
+<td></td>
+</tr><tr><td>wind_speed</td>
+<td></td>
+<td></td>
+</tr><tr><td>wind_gust</td>
+<td></td>
+<td></td>
+</tr><tr><td>precip</td>
+<td></td>
+<td></td>
+</tr><tr><td>pressure</td>
+<td></td>
+<td></td>
+</tr><tr><td>visib</td>
+<td></td>
+<td></td>
+</tr><tr><td>time_hour</td>
 <td></td>
 <td></td>
 </tr></tbody></table></section><section><h2 class="section-heading" id="iata_codes">iata_codes<a class="anchor" aria-label="anchor" href="#iata_codes"></a></h2>
-<hr class="half-width"><table class="table"><colgroup><col width="17%"><col width="71%"><col width="11%"></colgroup><thead><tr><th>Variable</th>
+<hr class="half-width"><p>Skal konsolideres med “airports” data fra nycflights13</p>
+<table class="table"><colgroup><col width="17%"><col width="71%"><col width="11%"></colgroup><thead><tr><th>Variable</th>
 <th>Description/Code</th>
 <th>Unit</th>
 </tr></thead><tbody><tr><td>iata_code</td>
